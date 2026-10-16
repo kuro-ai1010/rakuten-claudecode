@@ -1,0 +1,1597 @@
+<title>楽天ROOM 投稿準備ガイド</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500&family=Shippori+Mincho:wght@500;700&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: 縦に流れる章立ての編集ページ。章頭に細い真鍮色の目印、図解と画面再現を主役に置く */
+:root{
+  --bg:#f3f4f1; --surface:#ffffff; --ink:#14202e; --muted:#566271; --line:#d8dcd6;
+  --brass:#8f7237; --brass-soft:#efe8d8; --deep:#14202e; --deep-ink:#eef0ea;
+  --ext:#b3262d; --ext-ink:#ffffff; --ext-glow:#f3d9db; --you:#8f7237; --ai:#2f5d62; --ok:#2f6b4f; --bad:#8d3b3b;
+  --term:#0c131b; --term-ink:#d6dde3; --term-dim:#7f8c99; --term-line:#1f2b37;
+  --f-disp:"Shippori Mincho","Hiragino Mincho ProN","Yu Mincho",serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,Consolas,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d151e; --surface:#142130; --ink:#e9ece7; --muted:#9aa6b3; --line:#243446;
+  --brass:#cdab6a; --brass-soft:#2a2a22; --deep:#09101a; --deep-ink:#eef0ea;
+  --ext:#e0525a; --ext-ink:#1a0b0c; --ext-glow:#3a1d20; --you:#cdab6a; --ai:#79b1b6; --ok:#7cc3a0; --bad:#d58a8a; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d151e; --surface:#142130; --ink:#e9ece7; --muted:#9aa6b3; --line:#243446;
+  --brass:#cdab6a; --brass-soft:#2a2a22; --deep:#09101a; --deep-ink:#eef0ea;
+  --you:#cdab6a; --ai:#79b1b6; --ok:#7cc3a0; --bad:#d58a8a; color-scheme:dark;--ext:#e0525a;--ext-ink:#1a0b0c;--ext-glow:#3a1d20}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.95;padding-inline:20px}
+a{color:inherit}
+.wrap{max-width:1040px;margin-inline:auto}
+header.top{flex-wrap:wrap;display:flex;justify-content:space-between;align-items:center;gap:16px;padding-block:22px;border-bottom:1px solid var(--line)}
+.copyright{margin:0;padding:12px 0 0;font-size:12.5px;line-height:1.7;color:var(--muted);letter-spacing:.04em}
+.brand{white-space:nowrap;font-family:var(--f-disp);font-weight:700;letter-spacing:.12em;font-size:15px}
+nav.menu{display:flex;gap:6px 22px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+nav.menu a{text-decoration:none;padding:2px 0;border-bottom:1px solid transparent}
+nav.menu a:hover,nav.menu a:focus-visible{color:var(--ink);border-color:var(--brass);outline:none}
+.hero{padding-block:64px 40px;display:grid;gap:40px}
+.eyebrow{font-size:12px;letter-spacing:.28em;color:var(--brass);font-weight:700}
+h1{font-family:var(--f-disp);font-weight:700;font-size:clamp(32px,6.2vw,60px);line-height:1.35;letter-spacing:.03em;margin:14px 0 22px;text-wrap:balance}
+.lead{max-width:36em;color:var(--muted);font-size:17px;margin:0}
+.cta{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:13px 26px;border:1px solid var(--ink);background:var(--ink);color:var(--bg);font:inherit;font-weight:700;font-size:15px;letter-spacing:.06em;text-decoration:none;cursor:pointer;border-radius:2px}
+.ext{display:inline-flex;align-items:center;gap:10px;margin:6px 10px 6px 0;padding:13px 22px;background:var(--ext);color:var(--ext-ink);border:1px solid var(--ext);border-radius:2px;font-weight:700;font-size:15px;letter-spacing:.05em;text-decoration:none;line-height:1.3;box-shadow:0 2px 0 rgba(0,0,0,.18)}
+.ext::after{content:"↗";font-weight:400;font-size:16px}
+.ext.dl{font-family:inherit;cursor:pointer}
+.ext.dl::after{content:"↓"}
+.ext:hover{filter:brightness(1.08);box-shadow:0 0 0 3px var(--ext-glow)}
+.ext:focus-visible{outline:2px solid var(--ext);outline-offset:3px}
+.ext-row{margin:14px 0 4px}.ext-row small{display:block;color:var(--muted);font-size:12.5px;margin:2px 0 0}
+
+/* ---------- 進行ガイド ---------- */
+.gd{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;min-width:0}
+.gd-main>*{min-width:0}
+.gd-win{max-width:100%}
+.gd-track{position:sticky;top:0;z-index:5;background:var(--bg);padding:12px 0 10px;border-bottom:1px solid var(--line)}
+.gd-chips{display:flex;gap:6px;overflow-x:auto;padding:4px 2px 8px;scrollbar-width:thin;min-width:0}
+.gd-chip{flex:1 0 auto;min-width:92px;display:flex;flex-direction:column;align-items:flex-start;gap:3px;padding:8px 12px;background:var(--surface);border:1px solid var(--line);border-radius:3px;font:inherit;color:var(--muted);cursor:pointer;text-align:left;transition:border-color .3s,background .3s,color .3s}
+.gd-chip b{display:flex;align-items:center;gap:6px;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.08em;font-weight:500}
+.gd-chip b i{width:16px;height:16px;border-radius:50%;border:1px solid currentColor;display:grid;place-items:center;font-style:normal;font-size:10px;line-height:1}
+.gd-chip span{font-size:12.5px;font-weight:700;color:var(--ink)}
+.gd-chip.cur{border-color:var(--brass);background:var(--brass-soft);color:var(--brass);box-shadow:0 0 0 3px var(--brass-soft)}
+.gd-chip.cur b i{animation:gdpulse 1.6s ease-in-out infinite}
+.gd-chip.done{color:var(--ok);border-color:var(--ok)}
+.gd-chip.done b i{background:var(--ok);border-color:var(--ok);color:var(--surface)}
+@keyframes gdpulse{0%,100%{box-shadow:0 0 0 0 var(--brass)}60%{box-shadow:0 0 0 6px transparent}}
+.gd-meter{display:flex;align-items:center;gap:12px;font-size:13px;color:var(--muted)}
+.gd-meter .rail{flex:1;height:6px;background:var(--line);border-radius:6px;overflow:hidden}
+.gd-meter .fill{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brass),var(--ok));border-radius:6px;transition:width .9s cubic-bezier(.2,.8,.2,1)}
+.gd-meter b{color:var(--ink);font-family:var(--f-mono);font-weight:500}
+.gd-main{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:28px;align-items:start}
+.gd-left,.gd-right{min-width:0}
+.gd-left h3{font-family:var(--f-disp);font-size:24px;margin:0 0 6px}
+.gd-left .doing{color:var(--muted);margin:0 0 14px;font-size:15px}
+.gd-actors{display:flex;gap:8px;margin-bottom:10px;flex-wrap:wrap}
+.gd-actors span{font-size:12px;font-weight:700;letter-spacing:.06em;padding:3px 12px;border:1px solid var(--line);border-radius:20px;color:var(--muted);background:var(--surface);transition:all .3s}
+.gd-actors span.on{color:var(--surface);border-color:transparent}
+.gd-actors span[data-a=you].on{background:var(--you)}
+.gd-actors span[data-a=claude].on{background:var(--ai)}
+.gd-actors span[data-a=site].on{background:var(--ext);color:var(--ext-ink)}
+.gd-win .body{padding:16px 16px 12px;min-height:210px;font-family:var(--f-mono);font-size:13px;line-height:1.9}
+.gd-l{display:block;white-space:pre-wrap;word-break:break-all;opacity:.55}
+.gd-l.cur{opacity:1}
+.gd-l.cmd::before{content:"› ";color:var(--brass)}
+.gd-l.ui{color:#cfe3e6}.gd-l.ui::before{content:"▢ ";color:var(--term-dim)}
+.gd-l.out{color:#9fd8b8}.gd-l.out::before{content:"✓ ";color:#7cc3a0}
+.gd-cap{display:flex;align-items:center;gap:10px;margin-top:10px;font-size:14px;color:var(--ink);min-height:26px}
+.gd-cap i{display:inline-flex;gap:3px}.gd-cap i u{width:5px;height:5px;border-radius:50%;background:var(--brass);animation:gddot 1.1s infinite ease-in-out;display:block}
+.gd-cap i u:nth-child(2){animation-delay:.18s}.gd-cap i u:nth-child(3){animation-delay:.36s}
+@keyframes gddot{0%,80%,100%{opacity:.25;transform:translateY(0)}40%{opacity:1;transform:translateY(-3px)}}
+.gd-prog{display:flex;gap:4px;margin-top:8px}.gd-prog u{flex:1;height:3px;background:var(--line);border-radius:3px;display:block;transition:background .3s}.gd-prog u.on{background:var(--brass)}
+.gd-right h4{font-family:var(--f-disp);font-size:16px;margin:0 0 8px;letter-spacing:.06em}
+.gd-todo{margin:0 0 14px;padding-left:22px;font-size:14.5px;line-height:1.85}
+.gd-checks{list-style:none;margin:0 0 12px;padding:0;display:grid;gap:8px}
+.gd-checks li{display:flex;gap:12px;align-items:flex-start;padding:11px 14px;border:1px solid var(--line);background:var(--surface);border-radius:3px;transition:border-color .3s,background .3s}
+.gd-checks input{position:absolute;opacity:0;pointer-events:none}
+.gd-checks label{display:flex;gap:12px;align-items:flex-start;cursor:pointer;flex:1;min-width:0}
+.gd-checks .bx{flex:none;width:20px;height:20px;border:1.5px solid var(--muted);border-radius:3px;display:grid;place-items:center;margin-top:1px;transition:all .25s}
+.gd-checks input:checked+.bx{background:var(--brass);border-color:var(--brass)}
+.gd-checks input:checked+.bx::after{content:"";width:5px;height:10px;border:solid var(--surface);border-width:0 2px 2px 0;transform:rotate(45deg) translate(-1px,-1px)}
+.gd-checks input:focus-visible+.bx{outline:2px solid var(--brass);outline-offset:2px}
+.gd-checks .tx b{display:block;font-size:14.5px}.gd-checks .tx small{color:var(--muted);font-size:12.5px}
+.gd-checks .st{flex:none;font-size:12.5px;font-weight:700;min-width:54px;text-align:right}
+.gd-checks li.run{border-color:var(--brass)}
+.gd-checks li.run .st::before{content:"";display:inline-block;width:12px;height:12px;border:2px solid var(--line);border-top-color:var(--brass);border-radius:50%;animation:gdspin .7s linear infinite;vertical-align:-2px;margin-right:6px}
+.gd-checks li.run .st::after{content:"確認中"}
+.gd-checks li.ok{border-color:var(--ok);background:var(--surface)}.gd-checks li.ok .st{color:var(--ok)}.gd-checks li.ok .st::after{content:"OK"}
+.gd-checks li.ng{border-color:var(--bad);animation:gdshake .4s}.gd-checks li.ng .st{color:var(--bad)}.gd-checks li.ng .st::after{content:"まだ"}
+@keyframes gdspin{to{transform:rotate(360deg)}}
+@keyframes gdshake{25%{transform:translateX(-4px)}75%{transform:translateX(4px)}}
+.gd-res{min-height:24px;font-size:14px;margin:10px 0 0;font-weight:700}
+.gd-res.ok{color:var(--ok)}.gd-res.ng{color:var(--bad)}
+.gd-next{margin-top:12px;border:1px solid var(--ok);background:var(--surface);border-left-width:4px;padding:14px 16px;border-radius:3px;opacity:0;transform:translateY(8px);max-height:0;overflow:hidden;padding-block:0;border-width:0;transition:all .6s cubic-bezier(.2,.8,.2,1)}
+.gd-next.show{opacity:1;transform:none;max-height:260px;padding-block:14px;border-width:1px 1px 1px 4px}
+.gd-next b{display:block;font-size:12px;letter-spacing:.14em;color:var(--ok);margin-bottom:4px}
+.gd-next p{margin:0 0 10px;font-size:15px;min-height:1.6em}
+.gd-reset{background:none;border:0;color:var(--muted);font:inherit;font-size:12.5px;text-decoration:underline;cursor:pointer;margin-top:10px;padding:0}
+@media (max-width:860px){.gd-main{grid-template-columns:minmax(0,1fr)}}
+@media (prefers-reduced-motion:reduce){.gd-chip.cur b i,.gd-cap i u,.gd-checks li.run .st::before{animation:none}.gd-next,.gd-meter .fill{transition:none}}
+.btn.ghost{background:transparent;color:var(--ink)}
+.btn:hover{border-color:var(--brass);box-shadow:0 0 0 3px var(--brass-soft)}
+.btn:focus-visible{outline:2px solid var(--brass);outline-offset:3px}
+.facts{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.facts div{padding:18px 8px 18px 0}
+.facts div+div{padding-left:20px;border-left:1px solid var(--line)}
+.facts b{display:block;font-family:var(--f-disp);font-size:clamp(22px,4vw,34px);line-height:1.3;font-weight:700}
+.facts span{font-size:13px;color:var(--muted)}
+/* flow diagram */
+.flow{background:var(--deep);color:var(--deep-ink);padding:34px clamp(16px,3vw,36px) 30px;border-radius:2px}
+.flow h3{font-family:var(--f-disp);font-size:18px;margin:0 0 6px;letter-spacing:.06em}
+.flow p.sub{margin:0 0 26px;color:#aab4be;font-size:13px}
+.track{position:relative;display:grid;grid-template-columns:repeat(5,1fr);gap:8px;list-style:none;padding:0;margin:0}
+.track::before{content:"";position:absolute;left:3%;right:3%;top:21px;height:1px;background:#33465a}
+.track::after{content:"";position:absolute;left:3%;top:21px;height:1px;width:94%;background:linear-gradient(90deg,#cdab6a,#cdab6a);transform-origin:left;animation:grow 10s linear infinite}
+.track li{position:relative;z-index:1;text-align:center;font-size:12.5px;line-height:1.6;padding-inline:2px}
+.dot{width:42px;height:42px;margin:0 auto 12px;border-radius:50%;border:1px solid #4b6075;background:#0d1824;display:grid;place-items:center;font-family:var(--f-mono);font-size:13px;color:#aab4be;animation:lit 10s infinite}
+.track li:nth-child(1) .dot{animation-delay:0s}.track li:nth-child(2) .dot{animation-delay:2s}.track li:nth-child(3) .dot{animation-delay:4s}
+.track li:nth-child(4) .dot{animation-delay:6s}.track li:nth-child(5) .dot{animation-delay:8s}
+.who{display:inline-block;margin-top:6px;font-size:11px;letter-spacing:.1em;padding:1px 9px;border:1px solid;border-radius:20px}
+.who.ai{color:#79b1b6}.who.me{color:#cdab6a}
+@keyframes lit{0%{background:#0d1824;border-color:#4b6075;color:#aab4be;transform:scale(1)}3%{background:#cdab6a;border-color:#cdab6a;color:#14202e;transform:scale(1.12)}14%{background:#cdab6a;border-color:#cdab6a;color:#14202e;transform:scale(1.12)}18%,100%{background:#0d1824;border-color:#4b6075;color:#aab4be;transform:scale(1)}}
+@keyframes grow{0%{transform:scaleX(0)}95%,100%{transform:scaleX(1)}}
+.legend{display:flex;gap:20px;flex-wrap:wrap;margin-top:24px;font-size:12.5px;color:#aab4be}
+.legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:7px}
+/* sections */
+section{padding-block:76px 12px;scroll-margin-top:10px}
+.sec-head{display:grid;grid-template-columns:auto 1fr;gap:6px 22px;align-items:end;margin-bottom:34px}
+.sec-head .no{font-family:var(--f-disp);font-size:13px;letter-spacing:.2em;color:var(--brass);border-top:2px solid var(--brass);padding-top:10px;grid-column:1/-1}
+h2{font-family:var(--f-disp);font-size:clamp(25px,4.4vw,38px);line-height:1.45;margin:0;letter-spacing:.04em;text-wrap:balance;grid-column:1/-1}
+.sec-head p{grid-column:1/-1;margin:6px 0 0;color:var(--muted);max-width:40em}
+h3.step{font-family:var(--f-disp);font-size:21px;margin:0 0 10px;letter-spacing:.04em;line-height:1.5}
+.pair{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:34px;align-items:start;padding-block:34px;border-top:1px solid var(--line)}
+.pair.rev{grid-template-columns:minmax(0,1.1fr) minmax(0,1fr)}
+.pair p{margin:0 0 12px}
+.tag{display:inline-block;font-size:11.5px;letter-spacing:.12em;font-weight:700;padding:1px 10px;border:1px solid;border-radius:20px;margin-bottom:12px}
+.tag.ai{color:var(--ai)}.tag.me{color:var(--you)}
+.note{font-size:13.5px;color:var(--muted);border-left:2px solid var(--brass);padding:2px 0 2px 14px;margin:14px 0 0}
+code{font-family:var(--f-mono);font-size:.88em;background:var(--brass-soft);padding:1px 7px;border-radius:2px}
+/* windows */
+.win{background:var(--term);color:var(--term-ink);border-radius:6px;overflow:hidden;border:1px solid var(--term-line);box-shadow:0 18px 40px -22px rgba(0,0,0,.55);min-width:0}
+.win .bar{display:flex;align-items:center;gap:7px;padding:10px 14px;border-bottom:1px solid var(--term-line);font-family:var(--f-mono);font-size:11.5px;color:var(--term-dim)}
+.win .bar i{width:10px;height:10px;border-radius:50%;background:#2b3947;display:block}
+.win .bar span{margin-left:8px}
+.win .body{padding:16px 18px;font-family:var(--f-mono);font-size:12.5px;line-height:1.75;overflow-x:auto}
+.win .body pre{margin:0;font:inherit;white-space:pre}
+.c-dim{color:var(--term-dim)}.c-gold{color:#cdab6a}.c-teal{color:#79b1b6}.c-ok{color:#7cc3a0}
+.cursor{display:inline-block;width:8px;height:15px;background:#cdab6a;vertical-align:-3px;animation:blink 1.1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.browser{background:var(--surface);border:1px solid var(--line);border-radius:6px;overflow:hidden;box-shadow:0 18px 40px -26px rgba(20,32,46,.5);min-width:0}
+.browser .bar{display:flex;align-items:center;gap:6px;padding:9px 12px;background:var(--bg);border-bottom:1px solid var(--line)}
+.browser .bar i{width:9px;height:9px;border-radius:50%;background:var(--line);display:block}
+.browser .url{flex:1;margin-left:8px;font-family:var(--f-mono);font-size:11px;color:var(--muted);background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:2px 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.browser .pg{padding:20px 22px}
+.pg h4{font-family:var(--f-disp);margin:0 0 14px;font-size:17px}
+.field{margin-bottom:12px}
+.field label{display:block;font-size:11.5px;color:var(--muted);letter-spacing:.06em}
+.field .in{border:1px solid var(--line);border-radius:3px;padding:7px 11px;font-family:var(--f-mono);font-size:12.5px;background:var(--bg);position:relative}
+.field .in.hl{border-color:var(--brass);box-shadow:0 0 0 3px var(--brass-soft);animation:pulse 2.6s ease-in-out infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 7px transparent}}
+.keybox{display:grid;gap:8px;margin-top:6px;padding:12px;border:1px dashed var(--brass);border-radius:3px;font-family:var(--f-mono);font-size:12px}
+.keybox b{color:var(--brass);font-weight:500}
+/* env */
+.envline{display:flex;gap:10px}.envline .ln{color:#4b5a69;user-select:none;width:1.4em;text-align:right}
+.hlline{background:#1a2a3a;margin-inline:-18px;padding-inline:18px;box-shadow:inset 2px 0 0 #cdab6a}
+/* player */
+.player{margin-top:6px}
+.pl-ctrl{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.pl-ctrl .btn{padding:9px 18px;font-size:13px}
+.pl-ctrl .hint{font-size:12.5px;color:var(--muted)}
+.term .body{min-height:380px;max-height:620px;overflow:auto}
+.ln-row{margin:0 0 10px;opacity:1}
+.ln-row.pop{animation:pop .45s ease both}
+@keyframes pop{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.q{border:1px solid #2b3c4d;border-radius:4px;padding:12px 14px;background:#101a24;margin:2px 0 4px}
+.q h5{margin:0 0 8px;font-size:12.5px;color:#cdab6a;font-weight:500;letter-spacing:.04em}
+.q li{list-style:none;display:flex;gap:10px;padding:2px 0;color:#9eacb9}
+.q ul{margin:0;padding:0}
+.q li.on{color:#eef0ea}.q li.on b{color:#7cc3a0}
+.q li b{font-weight:500;width:1.6em;display:inline-block}
+.table-wrap{overflow-x:auto}
+/* phone */
+.phone-grid{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:46px;align-items:center}
+.phone{width:262px;margin-inline:auto;background:#0d151e;border-radius:34px;padding:11px;box-shadow:0 26px 50px -26px rgba(0,0,0,.6);border:1px solid #243446}
+.screen{background:#fff;color:#1b2531;border-radius:25px;overflow:hidden;font-size:11.5px;line-height:1.65;min-height:470px;position:relative}
+.screen .top{display:flex;justify-content:space-between;padding:14px 16px 10px;font-weight:700;border-bottom:1px solid #e5e8e4;font-size:12px}
+.screen .top span:last-child{color:#fff;background:#14202e;padding:0 12px;border-radius:12px;animation:tap 3.4s ease-in-out infinite}
+@keyframes tap{0%,70%,100%{background:#14202e;transform:scale(1)}80%{background:#8f7237;transform:scale(.92)}}
+.shot{margin:12px 14px 8px;height:150px;border-radius:5px;background:linear-gradient(135deg,#e8e4d9,#cfd6d4);position:relative;overflow:hidden}
+.shot::before{content:"";position:absolute;left:24%;top:30%;width:52%;height:42%;border:2px solid #fff;background:rgba(255,255,255,.55);border-radius:4px;box-shadow:0 10px 20px -8px rgba(20,32,46,.35)}
+.shot::after{content:"";position:absolute;left:30%;top:22%;width:40%;height:10%;background:#fff;border-radius:2px;box-shadow:0 6px 12px -6px rgba(20,32,46,.3)}
+.shot em{position:absolute;right:8px;bottom:6px;font-size:10px;color:#46525f;font-style:normal;background:rgba(255,255,255,.8);padding:0 7px;border-radius:8px}
+.screen .txt{margin:0 14px;color:#2b3846}
+.screen .txt p{margin:0 0 6px}
+.screen .tags{color:#2f5d62}
+.screen .pr{color:#7a838c}
+.phone-steps{display:grid;gap:18px}
+.phone-steps div{display:grid;grid-template-columns:34px 1fr;gap:14px}
+.phone-steps b{font-family:var(--f-disp);font-size:18px;color:var(--brass);line-height:1.5}
+.phone-steps p{margin:0}
+/* rules */
+.cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.col{border-top:2px solid var(--ink);padding-top:16px}
+.col.no{border-color:var(--bad)}.col.yes{border-color:var(--ok)}
+.col h3{font-family:var(--f-disp);margin:0 0 12px;font-size:19px}
+.col ul{margin:0;padding:0;list-style:none;display:grid;gap:9px}
+.col li{display:grid;grid-template-columns:22px 1fr;gap:6px;font-size:15px;line-height:1.8}
+.col.no li::before{content:"×";color:var(--bad);font-weight:700}
+.col.yes li::before{content:"○";color:var(--ok);font-weight:700}
+.col li{grid-template-columns:22px 1fr}
+.col li::before{grid-column:1}
+/* kit */
+.kit{background:var(--surface);border:1px solid var(--line);border-radius:3px;padding:26px clamp(16px,3vw,32px)}
+.tabs{display:flex;gap:4px;flex-wrap:wrap;border-bottom:1px solid var(--line);margin:22px 0 0}
+.tabs button{font:inherit;font-family:var(--f-mono);font-size:12.5px;background:none;border:0;border-bottom:2px solid transparent;color:var(--muted);padding:9px 14px;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--brass)}
+.tabs button:focus-visible{outline:2px solid var(--brass)}
+.panel{position:relative;min-width:0}
+.panel[hidden]{display:none}
+.panel .win{border-radius:0 0 6px 6px}
+.panel .win .body{max-height:420px;overflow:auto}
+.copy{position:absolute;right:12px;top:12px;font:inherit;font-size:12px;background:#1a2a3a;color:#eef0ea;border:1px solid #33465a;padding:5px 13px;border-radius:3px;cursor:pointer;z-index:2}
+.copy:hover{border-color:#cdab6a}
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px;margin-top:26px}
+.how div{border-top:1px solid var(--line);padding-top:14px;font-size:14.5px}
+.how b{display:block;font-family:var(--f-disp);font-size:16px;margin-bottom:4px}
+/* faq */
+details{border-top:1px solid var(--line);padding:16px 0}
+details:last-of-type{border-bottom:1px solid var(--line)}
+summary{cursor:pointer;font-family:var(--f-disp);font-weight:700;font-size:17px;list-style:none;display:flex;justify-content:space-between;gap:16px}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"＋";color:var(--brass);font-family:var(--f-body)}
+details[open] summary::after{content:"－"}
+summary:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+details p{margin:10px 0 0;color:var(--muted);max-width:42em}
+footer{margin-top:90px;padding-block:30px 50px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+footer p{margin:0 0 6px;max-width:52em}
+.toggle{background:none;border:1px solid var(--line);color:var(--muted);font:inherit;font-size:12px;padding:4px 12px;border-radius:14px;cursor:pointer}
+@media (max-width:820px){
+  .pair,.pair.rev,.phone-grid,.cols,.how{grid-template-columns:minmax(0,1fr)}
+  .pair{gap:22px}
+  .track{grid-template-columns:1fr;gap:0}
+  .track::before,.track::after{left:20px;right:auto;top:20px;bottom:20px;width:1px;height:auto}
+  .track::after{height:94%;width:1px;transform-origin:top;animation-name:growv}
+  .track li{display:grid;grid-template-columns:42px 1fr;gap:4px 16px;text-align:left;padding-block:9px;align-items:center}
+  .dot{margin:0;grid-row:span 2}
+  .who{justify-self:start;margin:0}
+  .facts{grid-template-columns:1fr}
+  .facts div+div{padding-left:0;border-left:0;border-top:1px solid var(--line)}
+  .hero{padding-block:44px 24px}
+}
+@keyframes growv{0%{transform:scaleY(0)}95%,100%{transform:scaleY(1)}}
+
+.caret{display:inline-block;width:1px;height:1.1em;background:var(--brass);vertical-align:-3px;margin-left:1px;animation:blink 1s steps(1) infinite}
+.mode{display:inline-flex;border:1px solid var(--line);border-radius:3px;margin:0 0 14px 0;overflow:hidden}
+.seg{font:inherit;font-size:13px;background:none;border:0;padding:7px 16px;color:var(--muted);cursor:pointer}
+.seg.on{background:var(--ink);color:var(--bg)}
+.seg:focus-visible{outline:2px solid var(--brass);outline-offset:-2px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;list-style:none;padding:0;margin:0 0 14px}
+.chips li{font-size:12px;padding:3px 12px;border:1px solid var(--line);border-radius:20px;color:var(--muted);transition:background .3s,color .3s,border-color .3s}
+.chips li.on{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.chips li.done{border-color:var(--brass);color:var(--brass)}
+/* arch */
+.arch{position:relative;display:flex;align-items:stretch;padding:34px 0 10px}
+.a-node{flex:0 0 auto;width:min(17%,170px);border:1px solid var(--line);background:var(--surface);padding:16px 14px;border-radius:3px;text-align:center;transition:border-color .3s,box-shadow .3s,transform .3s;position:relative;z-index:1}
+.a-node b{display:block;font-family:var(--f-disp);font-size:16px;line-height:1.5}
+.a-node span{font-size:12px;color:var(--muted);line-height:1.6;display:block}
+.a-node.on{border-color:var(--brass);box-shadow:0 0 0 4px var(--brass-soft);transform:translateY(-3px)}
+.a-ro{border-style:dashed}
+.a-link{flex:1;align-self:center;height:1px;background:var(--line);position:relative;min-width:20px}
+.a-lock::after{content:"";display:none;position:absolute;left:50%;top:-22px;transform:translateX(-50%);font-size:11px;letter-spacing:.1em;color:var(--brass);background:var(--bg);padding:0 8px;border:1px solid var(--brass);border-radius:10px;line-height:1.7}
+.a-packet{position:absolute;top:calc(34px + 50% - 5px);left:0;width:12px;height:12px;border-radius:50%;background:var(--brass);box-shadow:0 0 0 5px var(--brass-soft);z-index:2;transition:left 1.4s cubic-bezier(.5,0,.2,1)}
+.a-cap{display:flex;gap:16px;align-items:baseline;border-top:1px solid var(--line);margin-top:24px;padding-top:16px;min-height:3.4em}
+.a-cap i{font-style:normal;font-family:var(--f-mono);font-size:12px;color:var(--brass);white-space:nowrap}
+.a-cap span{font-family:var(--f-disp);font-size:18px;line-height:1.7}
+/* talk */
+.talk-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,1fr);gap:36px;align-items:start}
+.bubble{margin-bottom:14px;font-family:var(--f-body);font-size:14px;color:#eef0ea}
+.tasks{list-style:none;margin:0;padding:0;font-family:var(--f-body);font-size:13.5px;display:grid;gap:7px}
+.tasks li{display:flex;gap:11px;align-items:center;color:#7f8c99;transition:color .3s}
+.tasks li b{width:16px;height:16px;border-radius:50%;border:1px solid #3b4d5f;display:inline-block;flex:0 0 auto;position:relative}
+.tasks li.run{color:#eef0ea}.tasks li.run b{border-color:#cdab6a;border-top-color:transparent;animation:spin .8s linear infinite}
+.tasks li.ok{color:#d6dde3}.tasks li.ok b{background:#7cc3a0;border-color:#7cc3a0}
+.tasks li.ok b::after{content:"";position:absolute;left:4px;top:2px;width:4px;height:7px;border:solid #0c131b;border-width:0 2px 2px 0;transform:rotate(45deg)}
+.tasks li.ask{color:#cdab6a}.tasks li.ask b{border-color:#cdab6a;animation:pulseb 1.2s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulseb{50%{box-shadow:0 0 0 6px rgba(205,171,106,.2)}}
+.turn{margin-top:16px;padding:10px 14px;border:1px solid #cdab6a;border-radius:3px;color:#cdab6a;font-family:var(--f-body);font-size:13.5px}
+.plain{list-style:none;padding:0;margin:18px 0;display:grid;gap:14px}
+.plain li{border-top:1px solid var(--line);padding-top:12px;font-size:15px}
+.plain b{display:block;font-family:var(--f-disp);font-size:16px}
+/* phone extras */
+.screen .toast{position:absolute;left:50%;bottom:16px;transform:translate(-50%,16px);background:#14202e;color:#fff;padding:5px 15px;border-radius:15px;font-size:11px;opacity:0;transition:.4s;white-space:nowrap}
+.screen .toast.show{opacity:1;transform:translate(-50%,0)}
+.shot .flash{position:absolute;inset:0;background:#fff;opacity:0}
+.shot .flash.go{animation:flash .5s ease-out}
+@keyframes flash{0%{opacity:.9}100%{opacity:0}}
+/* tree */
+.tree{margin-top:22px;max-width:520px}
+.tree .tr{display:block;transition:opacity .35s,transform .35s}
+.tree .tr.hide{opacity:0;transform:translateX(-8px)}
+@media (max-width:820px){
+  .talk-grid{grid-template-columns:minmax(0,1fr)}
+  .arch{flex-direction:column;align-items:stretch;padding:12px 0}
+  .a-node{width:100%}
+  .a-link{width:1px;height:34px;align-self:center;min-width:0}
+  .a-lock::after{left:12px;top:50%;transform:translateY(-50%)}
+  .a-packet{display:none}
+}
+
+.cursor.b-c{display:none}.cursor.b-c.on{display:inline-block}
+
+.boundary{margin-top:40px;border:1px solid var(--brass);border-radius:3px;padding:22px clamp(16px,3vw,30px);background:var(--brass-soft)}
+.boundary h3{font-family:var(--f-disp);margin:0 0 10px;font-size:19px}
+.boundary p{margin:0 0 10px;max-width:46em}
+.boundary p:last-child{margin:0}
+
+
+.imbar{display:inline-block;width:140px;height:6px;background:#1f2b37;border-radius:3px;vertical-align:middle;overflow:hidden}
+.imbar i{display:block;height:100%;width:100%;background:#cdab6a}
+.imgprev{margin-top:16px;display:flex;gap:14px;align-items:center;font-family:var(--f-mono);font-size:12px;color:#7f8c99}
+.imgart{width:150px;height:150px;border-radius:4px;background:linear-gradient(160deg,#efe6d2 0%,#cfd8d2 55%,#b7c4c6 100%);position:relative;overflow:hidden;flex:0 0 auto}
+.imgart::before{content:"";position:absolute;left:12%;right:12%;top:38%;height:4px;background:#fff;opacity:.9;box-shadow:0 36px 0 #fff,0 72px 0 #fff}
+.imgart::after{content:"";position:absolute;left:20%;top:12%;width:26%;height:20%;border-radius:50%;background:#f6e7b8;opacity:.9;box-shadow:0 0 28px 10px rgba(246,231,184,.6)}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;scroll-behavior:auto!important}
+  .dot{background:#0d1824}
+}
+</style>
+
+<div class="wrap">
+<p class="copyright">※ 著作権はクロにあります。複製および転載などが発覚した場合は、法的措置を行うことがあります。</p>
+<header class="top">
+  <div class="brand">ROOM 投稿準備ガイド</div>
+  <nav class="menu" aria-label="目次">
+    <a href="#flow">全体の流れ</a><a href="#guide">進行ガイド</a><a href="#setup">最初の準備</a><a href="#talk">話しかけて始める</a><a href="#auto">自動で動かす</a><a href="#image">画像生成</a><a href="#daily">毎日の手順</a><a href="#rules">守ること</a><a href="#kit">キット</a><a href="#faq">困ったとき</a>
+    <button class="toggle" id="theme" type="button" aria-label="表示の明るさを切り替える">明暗</button>
+  </nav>
+</header>
+
+<div class="hero">
+  <div>
+    <div class="eyebrow">RAKUTEN ROOM × CLAUDE CODE</div>
+    <h1>Claude に任せて<br>アフィリエイトを完結させる</h1>
+    <p class="lead">楽天ROOMの投稿準備を、Claude Codeで自動にする手順書。決めた時間にClaudeが起動し、売れ筋と人気の商品探し、投稿文の下書き、イメージ画像づくりまでを進めます。朝には、投稿に使う文章と画像がそろった状態。ご自身で行うのは、ROOMアプリでの貼り付けと投稿のみです。</p>
+    <div class="cta">
+      <a class="btn" href="#setup">準備を始める</a>
+      <a class="btn ghost" href="#kit">キット一式を見る</a>
+    </div>
+  </div>
+  <div class="facts" role="list">
+    <div role="listitem"><b>約30分</b><span>最初の1回だけの準備</span></div>
+    <div role="listitem"><b>約2分</b><span>毎日の作業時間</span></div>
+    <div role="listitem"><b>1つ</b><span>自分で行う作業（貼り付けて投稿）</span></div>
+  </div>
+</div>
+
+<section id="flow" style="padding-top:28px">
+  <div class="flow" aria-label="毎日の流れの図">
+    <h3>毎日の流れ</h3>
+    <p class="sub">金色の点は、いま進んでいる場所。5つの手順が、順番に繰り返されます。</p>
+    <ol class="track">
+      <li><div class="dot">1</div>決めた時間に自動で起動<br><span class="who ai">Claude</span></li>
+      <li><div class="dot">2</div>売れ筋と人気を選ぶ<br><span class="who ai">Claude</span></li>
+      <li><div class="dot">3</div>投稿文を下書き<br><span class="who ai">Claude</span></li>
+      <li><div class="dot">4</div>イメージ画像を生成<br><span class="who ai">Claude</span></li>
+      <li><div class="dot">5</div>貼り付けて、ROOMで投稿<br><span class="who me">あなた</span></li>
+    </ol>
+    <div class="legend"><span><i style="background:#79b1b6"></i>Claudeが進める</span><span><i style="background:#cdab6a"></i>自分で行う</span></div>
+  </div>
+</section>
+
+
+<section id="arch" style="padding-top:44px">
+  <div class="sec-head"><div class="no">しくみ</div><h2>起動してから、投稿の準備が整うまで</h2><p>金色の丸は、情報の動き。毎朝、決めた時間に、ここまでが自動で進みます。</p></div>
+  <div class="arch" id="arch">
+    <div class="a-node" data-n="0"><b>起動の合図</b><span>決めた時間、または一言</span></div>
+    <div class="a-link"></div>
+    <div class="a-node" data-n="1"><b>Claude Code</b><span>あなたのパソコンの中</span></div>
+    <div class="a-link"></div>
+    <div class="a-node" data-n="2"><b>楽天の公式API</b><span>ランキングを返す窓口</span></div>
+    <div class="a-link"></div>
+    <div class="a-node" data-n="3"><b>画像生成API</b><span>イメージ画像を作る</span></div>
+    <div class="a-link"></div>
+    <div class="a-node a-ro" data-n="4"><b>ROOMアプリ</b><span>貼り付けて、投稿</span></div>
+    <div class="a-packet" id="a-packet"></div>
+  </div>
+  <div class="a-cap" id="a-cap" aria-live="polite"><i id="a-step">1 / 6</i><span id="a-text">「今日の投稿を作って」と話しかけます。</span></div>
+</section>
+
+<section id="guide">
+  <div class="sec-head"><div class="no">進行ガイド</div><h2>いま何をしていて、どこまで進んだか</h2><p>8つの手順を、ひとつずつ。画面の動きで「いまの作業」を見て、チェックでここまでOKかを確認。合格すると、次の案内が流れます。</p></div>
+  <div class="gd">
+    <div class="gd-track">
+      <div class="gd-chips" id="gd-chips" role="tablist" aria-label="手順の一覧"></div>
+      <div class="gd-meter"><span>進み具合</span><span class="rail"><span class="fill" id="gd-fill"></span></span><b id="gd-pct">0%</b></div>
+    </div>
+    <div class="gd-main">
+      <div class="gd-left">
+        <h3 id="gd-title"></h3>
+        <p class="doing" id="gd-doing"></p>
+        <div class="gd-actors" aria-hidden="true"><span data-a="you">あなた</span><span data-a="claude">Claude</span><span data-a="site">外部サービス</span></div>
+        <div class="win gd-win" role="img" aria-label="この手順で行う操作の再現アニメーション"><div class="bar"><i></i><i></i><i></i><span id="gd-wt">いまの作業</span></div><div class="body" id="gd-body"></div></div>
+        <div class="gd-cap"><i><u></u><u></u><u></u></i><span id="gd-cap"></span></div>
+        <div class="gd-prog" id="gd-prog"></div>
+      </div>
+      <div class="gd-right">
+        <h4>この手順でやること</h4>
+        <ol class="gd-todo" id="gd-todo"></ol>
+        <div class="ext-row" id="gd-ext"></div>
+        <h4>ここまでOK？</h4>
+        <ul class="gd-checks" id="gd-checks"></ul>
+        <button class="btn" type="button" id="gd-verify">確認する</button>
+        <p class="gd-res" id="gd-res" aria-live="polite"></p>
+        <div class="gd-next" id="gd-next"><b>次の案内</b><p id="gd-nexttx"></p><button class="btn" type="button" id="gd-go">次の手順へ進む</button></div>
+        <button class="gd-reset" type="button" id="gd-reset">進み具合をリセット</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="setup">
+  <div class="sec-head"><div class="no">PART 1　最初に1回だけ</div><h2>準備は3つ。順番に進めれば終わります</h2><p>むずかしい言葉には、そのつど説明を添えました。コピーして貼るだけの部分は、そのまま使える文を用意済み。</p></div>
+
+  <div class="pair">
+    <div>
+      <span class="tag me">自分で行う</span>
+      <h3 class="step">1　楽天ウェブサービスに登録する</h3>
+      <p>商品の候補は、楽天が公開している <b>API</b>（ほかのソフトが情報を受け取るための公式の窓口）から受け取る形。サイトを自動で読み取る方法は、使いません。</p>
+      <p>楽天ウェブサービスの「アプリ登録」で、アプリ名と、アプリのURL（ご自身のブログやSNSのページなど、公開されているもの）を入力。登録が終わると、<b>アプリID</b>と<b>アクセスキー</b>が表示される流れ。この2つは、あなた専用の鍵です。</p>
+      <div class="ext-row"><a class="ext" href="https://webservice.rakuten.co.jp/app/create" target="_blank" rel="noopener noreferrer">楽天ウェブサービスに登録する</a><a class="ext" href="https://affiliate.rakuten.co.jp/" target="_blank" rel="noopener noreferrer">楽天アフィリエイトに登録する</a><a class="ext" href="https://room.rakuten.co.jp/" target="_blank" rel="noopener noreferrer">楽天ROOMを開く</a><small>別のタブで開きます。登録済みの場合は、ログインして次へ。</small></div>
+      <p class="note">入力したURLは、あとで3つ目の設定にも使用。同じ文字での控えが安心。</p>
+    </div>
+    <div class="browser" id="sc-form" role="img" aria-label="アプリ登録画面の再現。入力欄に文字が入っていく">
+      <div class="bar"><i></i><i></i><i></i><div class="url">webservice.rakuten.co.jp / app / create</div></div>
+      <div class="pg">
+        <h4>アプリ登録（再現イメージ）</h4>
+        <div class="field"><label>アプリ名</label><div class="in"><span id="f1">my-room-helper</span><i class="caret"></i></div></div>
+        <div class="field"><label>アプリURL</label><div class="in hl"><span id="f2">https://example.com/</span><i class="caret"></i></div></div>
+        <div class="field"><label>アプリタイプ</label><div class="in">Webアプリケーション</div></div>
+        <div class="keybox" id="keybox"><span class="c-dim" style="color:var(--muted)">登録後に表示されます</span><span><b>アプリID</b>　 1234567890123456789</span><span><b>アクセスキー</b>　 xxxxxxxx-xxxx-xxxx</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="pair rev">
+    <div class="win" id="sc-boot" role="img" aria-label="Claude Codeが起動する様子の再現">
+      <div class="bar"><i></i><i></i><i></i><span>ターミナル</span></div>
+      <div class="body"><pre><span class="c-dim">$ </span><span id="b1">cd rakuten-room-kit</span><i class="cursor b-c" id="bc1"></i>
+<span id="bl2"><span class="c-dim">$ </span><span id="b2">claude</span><i class="cursor b-c" id="bc2"></i></span>
+
+<span id="bbox"><span class="c-teal">╭───────────────────────────╮</span>
+<span class="c-teal">│</span> <span class="c-gold">✻</span> Welcome to Claude Code      <span class="c-teal">│</span>
+<span class="c-teal">│</span>   <span class="c-dim">rakuten-room-kit</span>           <span class="c-teal">│</span>
+<span class="c-teal">╰───────────────────────────╯</span></span>
+
+<span id="btip" class="c-dim">このフォルダの CLAUDE.md を読み込みました</span>
+<span id="bp"><span class="c-gold">&gt;</span> <span id="b3">今日の投稿を作って</span><i class="cursor"></i></span></pre></div>
+    </div>
+    <div>
+      <span class="tag me">自分で行う</span>
+      <h3 class="step">2　キットを開いて、Claude Codeを起動する</h3>
+      <p class="note"><b>キットとは</b>この仕組みを動かすための、6つのファイルのセット。商品を探す道具、Claudeへの決まりごと、毎朝の自動実行の設定などが入っています。ダウンロードしたzipを解凍するか、このページの「キット」の章からコピーして、ひとつのフォルダに保存。そのフォルダが、作業の場所になります。</p>
+      <div class="ext-row"><button type="button" class="ext dl zipdl">キット一式（zip）をダウンロードする</button><small class="zipmsg" aria-live="polite">6つのファイルが、フォルダの形のまま入ったzipを作成。ダウンロード後は、解凍して使用。</small></div>
+      <p>フォルダの準備ができたら、次へ。ターミナル（文字で操作する画面）でそのフォルダに移動し、<code>claude</code> と入力すると、Claude Codeが始まります。左の画面は、起動の様子。最後の行に、話しかける言葉を入れます。</p>
+      <div class="ext-row"><a class="ext" href="https://docs.claude.com/en/docs/claude-code/overview" target="_blank" rel="noopener noreferrer">Claude Codeを入手する</a><a class="ext" href="https://www.python.org/downloads/" target="_blank" rel="noopener noreferrer">Pythonをダウンロードする</a></div>
+      <p>Claude Codeがない場合や、ターミナルの開き方が分からない場合は、Claudeに「やさしく教えて」と頼めば、お使いのパソコンに合わせた案内が届きます。Pythonという道具も使いますが、足りないときは同じ要領で案内される流れ。</p>
+    </div>
+  </div>
+
+  <div class="pair">
+    <div>
+      <span class="tag ai">Claudeが案内</span>
+      <h3 class="step">3　3つの値を入れる</h3>
+      <p>Claude Codeで「今日の投稿を作って」（または <code>/room</code>）と入力。最初の1回は、設定ファイル <code>.env</code> を自動で作り、「3行を書き換えてください」と案内して止まります。</p>
+      <p>テキストエディタで <code>.env</code> を開き、先ほどの <b>アプリID</b>、<b>アクセスキー</b>、<b>アプリURL</b> を、「ここに〜」の部分と置き換え。保存したら、もう一度、同じ言葉を入力。</p>
+      <p class="note"><code>.env</code> は、あなた専用の鍵が入ったファイル。人に見せたり、チャットに貼ったりするのは禁物です。</p>
+    </div>
+    <div class="win" id="sc-env" role="img" aria-label=".envファイルに3つの値が入っていく様子の再現">
+      <div class="bar"><i></i><i></i><i></i><span>.env</span></div>
+      <div class="body"><pre><span class="c-dim"># 楽天ウェブサービスのアプリ登録画面で確認できる値</span>
+<span class="hlline"><span class="c-gold">RAKUTEN_APP_ID</span>=<span class="c-ok" id="e1">1234567890123456789</span></span>
+<span class="hlline"><span class="c-gold">RAKUTEN_ACCESS_KEY</span>=<span class="c-ok" id="e2">xxxxxxxx-xxxx-xxxx</span></span>
+<span class="c-dim"># 登録したURLと、同じものにします</span>
+<span class="hlline"><span class="c-gold">RAKUTEN_REFERER</span>=<span class="c-ok" id="e3">https://example.com/</span></span>
+
+<span class="c-dim"># ジャンル（日用品・キッチン・スイーツ・食品）</span>
+<span class="c-gold">GENRE_IDS</span>=215783,558944,551167,100227
+<span class="c-gold">PER_GENRE</span>=3
+<span class="c-gold">MIN_REVIEW</span>=4.0</pre></div>
+    </div>
+  </div>
+</section>
+
+
+<section id="talk">
+  <div class="sec-head"><div class="no">PART 2　スラッシュコマンドが苦手な人へ</div><h2>「今日の投稿を作って」と話しかけるだけ</h2><p><code>/room</code> のような記号の入力は、不要。キットのフォルダでClaude Codeを開き、ふだんの言葉で頼めば、同じ流れが始まります。</p></div>
+  <div class="talk-grid">
+    <div class="win" id="sc-chat" role="img" aria-label="話しかけると、Claudeが順に作業する様子の再現">
+      <div class="bar"><i></i><i></i><i></i><span>rakuten-room-kit — claude</span></div>
+      <div class="body">
+        <div class="bubble"><span class="c-gold">&gt; </span><span id="ch-u">今日の投稿を作って</span><i class="cursor"></i></div>
+        <ul class="tasks" id="tasks">
+          <li data-s="d"><b></b>設定ファイルを確認する</li>
+          <li data-s="d"><b></b>公式APIから、候補を取得する</li>
+          <li data-s="d"><b></b>売れ筋と人気の高い4件を選ぶ</li>
+          <li data-s="d"><b></b>投稿文を、事実だけで下書きする</li>
+          <li data-s="d"><b></b>イメージ画像を生成する</li>
+        </ul>
+        <div class="turn" id="turn">できました。投稿文と画像は、today フォルダの中。</div>
+      </div>
+    </div>
+    <div>
+      <h3 class="step">仕組みは、ふだんの言葉で動きます</h3>
+      <p>キットの中の <code>CLAUDE.md</code> には、「今日の投稿を作って」と言われたら6つの手順を最初から進める、との決まりが書いてあります。Claude Codeは、起動したフォルダのこのファイルを自動で読み込むため、特別な設定は不要。</p>
+      <p>「今日の分をお願い」「投稿の準備をして」のような言い方でも、同じ動き。</p>
+      <ul class="plain">
+        <li><b>起動のしかた</b>キットのフォルダで <code>claude</code> と入力。</li>
+        <li><b>話しかける</b>「今日の投稿を作って」と入力して、Enterキーを押す。</li>
+        <li><b>あとは待つだけ</b>商品選び、投稿文、画像まで、Claudeが進める流れ。途中の質問は、ありません。</li>
+      </ul>
+      <p class="note">ROOMへの投稿だけは、あなたの手で。話しかけ方を変えても、ここは自動になりません。</p>
+    </div>
+  </div>
+</section>
+
+<section id="auto">
+  <div class="sec-head"><div class="no">PART 3　話しかけなくても動く</div><h2>毎朝、決めた時間に投稿の準備ができている</h2><p>パソコンの予約機能で、Claude Codeを好きな時間に自動で起動。起きたときには、今日の投稿文と画像が出来上がっています。話しかける手間は、なし。</p></div>
+  <div class="arch" id="arch2">
+    <div class="a-node" data-n="0"><b>毎朝7:00</b><span>パソコンの予約機能</span></div>
+    <div class="a-link"></div>
+    <div class="a-node" data-n="1"><b>Claude Code</b><span>自動で起動して作業</span></div>
+    <div class="a-link"></div>
+    <div class="a-node" data-n="2"><b>楽天の公式API</b><span>ランキングを返す窓口</span></div>
+    <div class="a-link"></div>
+    <div class="a-node" data-n="3"><b>画像生成API</b><span>イメージ画像を作る</span></div>
+    <div class="a-link"></div>
+    <div class="a-node a-ro" data-n="4"><b>あなたのスマホ</b><span>貼り付けて、投稿</span></div>
+    <div class="a-packet" id="a2-packet"></div>
+  </div>
+  <div class="a-cap" id="a2-cap" aria-live="polite"><i id="a2-step">1 / 6</i><span id="a2-text">毎朝7時になると、予約が自動でClaude Codeを起動します。</span></div>
+
+  <div class="talk-grid" style="margin-top:44px">
+    <div class="win" id="sc-sched" role="img" aria-label="Claudeに頼むと、毎朝の予約が設定される様子の再現">
+      <div class="bar"><i></i><i></i><i></i><span>rakuten-room-kit — claude</span></div>
+      <div class="body">
+        <div class="bubble"><span class="c-gold">&gt; </span><span id="sd-u">毎朝7時に run_daily.sh を動かす設定をして</span><i class="cursor"></i></div>
+        <ul class="tasks" id="sd-tasks">
+          <li><b></b>run_daily.sh があることを確認する</li>
+          <li><b></b>毎朝7時の予約を登録する</li>
+          <li><b></b>試しに1回、動かして確かめる</li>
+        </ul>
+        <div class="turn" id="sd-turn">設定完了。明日の朝7時から、自動で動きます。</div>
+      </div>
+    </div>
+    <div>
+      <span class="tag ai">いちばん簡単な方法</span>
+      <h3 class="step">Claudeに、予約の設定を頼む</h3>
+      <p>キットのフォルダでClaude Codeを開き、左の画面のように頼みます。入力する言葉は「毎朝7時に run_daily.sh を動かす設定をして」の1行のみ。Windowsの場合は、<code>run_daily.bat</code> を使うよう頼む形。</p>
+      <p>時間は、好きな時刻に変更可能。設定のあとは、頼んだ内容と登録された予約が、Claudeの画面に表示されます。</p>
+      <p class="note">予約が動く条件は、その時刻にパソコンの電源が入っていて、スリープしていないこと。Claude Codeにログインした状態の維持も、必要です。</p>
+    </div>
+  </div>
+
+  <div class="pair" style="margin-top:20px">
+    <div>
+      <span class="tag me">自分で設定したい人へ</span>
+      <h3 class="step">予約の登録を、コピーして貼る</h3>
+      <p>Claudeに頼まず、自分で登録する方法。<code>run_daily.sh</code> と <code>run_daily.bat</code> は、キットに入っています。中身は、Claudeを呼び出して手順1から5まで進めるだけの、短い処理。</p>
+      <p><b>MacとLinux</b> は、ターミナルで <code>crontab -e</code> と入力し、右の1行を末尾に足して保存。フォルダの場所は、自分のものに書き換え。</p>
+      <p><b>Windows</b> は、コマンドプロンプトに、右の2つ目をそのまま貼り付け。場所は、自分のものに書き換えてください。</p>
+      <p class="note">どちらも、予約の前に、一度だけ手で動かして確認。Macは <code>sh run_daily.sh</code>、Windowsは <code>run_daily.bat</code> を、キットのフォルダで実行します。</p>
+    </div>
+    <div style="display:grid;gap:16px;min-width:0;grid-template-columns:minmax(0,1fr)">
+      <div class="panel"><button class="copy" type="button" data-for="cr1">コピー</button><div class="win"><div class="bar"><span>Mac / Linux　crontab</span></div><div class="body"><pre id="cr1">0 7 * * * /bin/sh /フォルダの場所/rakuten-room-kit/run_daily.sh</pre></div></div></div>
+      <div class="panel"><button class="copy" type="button" data-for="cr2">コピー</button><div class="win"><div class="bar"><span>Windows　タスクスケジューラ</span></div><div class="body"><pre id="cr2">schtasks /create /tn "ROOM投稿準備" /tr "C:\フォルダの場所\rakuten-room-kit\run_daily.bat" /sc daily /st 07:00</pre></div></div></div>
+    </div>
+  </div>
+
+  <div class="pair rev">
+    <div class="win" role="img" aria-label="同期フォルダの設定の再現">
+      <div class="bar"><i></i><i></i><i></i><span>.env</span></div>
+      <div class="body"><pre><span class="c-dim"># スマホで見るための、同期フォルダ（任意）</span>
+<span class="hlline"><span class="c-gold">SYNC_DIR</span>=<span class="c-ok">/Users/自分の名前/Dropbox</span></span></pre></div>
+    </div>
+    <div>
+      <span class="tag me">任意</span>
+      <h3 class="step">スマホで開けるように、同期する</h3>
+      <div class="ext-row"><a class="ext" href="https://drive.google.com/" target="_blank" rel="noopener noreferrer">Google Driveを開く</a><a class="ext" href="https://www.dropbox.com/" target="_blank" rel="noopener noreferrer">Dropboxを開く</a></div>
+      <p>投稿文と画像の保存先は、<code>today</code> フォルダ。スマホで見たいときは、DropboxやiCloud Drive、Google Driveなど、スマホと同期されるフォルダを使います。</p>
+      <p>上のように <code>.env</code> に <code>SYNC_DIR</code> を1行足すと、毎朝、出来上がった投稿文と画像が、そのフォルダにコピーされます（Windowsは、<code>run_daily.bat</code> の中の説明に従います）。スマホでそのファイルを開き、文章を長押しでコピーして、ROOMアプリに貼り付けます。</p>
+    </div>
+  </div>
+
+  <div class="boundary">
+    <h3>最後の貼り付けだけ、アプリで</h3>
+    <p>毎朝、投稿文と画像が、今日のフォルダとスマホの同期フォルダにそろう仕組み。ROOMアプリを開き、文章を貼り付け、画像を選んで、投稿するだけ。</p>
+  </div>
+</section>
+
+<section id="image">
+  <div class="sec-head"><div class="no">PART 4　画像も自動で作る</div><h2>投稿に添える画像を、Claudeが生成する</h2><p>投稿文のあと、Claudeが画像の指示文を作り、画像生成のAPIを呼び出し。出来上がった画像は、today フォルダに保存されます。</p></div>
+  <div class="pair">
+    <div class="win" id="sc-img" role="img" aria-label="画像が生成される様子の再現">
+      <div class="bar"><i></i><i></i><i></i><span>rakuten-room-kit — claude</span></div>
+      <div class="body">
+        <pre><span class="c-dim">⏺ 実行　</span><span id="im-c">python3 room_tools.py image 1 "明るいキッチンの棚、やわらかい光のイラスト"</span><i class="cursor b-c" id="im-cur"></i>
+<span id="im-s" class="c-dim">生成中</span> <span class="imbar"><i id="im-bar"></i></span>
+<span id="im-o" class="c-ok">today/image_1.png に保存しました</span></pre>
+        <div class="imgprev" id="im-p"><div class="imgart"></div><span>today/image_1.png</span></div>
+      </div>
+    </div>
+    <div>
+      <span class="tag ai">Claudeが進める</span>
+      <h3 class="step">指示文づくりから、保存まで</h3>
+      <p>Claudeは、4本の投稿文それぞれに合う、雰囲気の伝わる画像の指示文を作成。条件は、文字なし、商品の実物は描かない、イラスト調、やわらかい光。この決まりはキットの <code>room.md</code> に書いてあり、毎回守られます。</p>
+      <p>出来上がった画像は、<code>today/image_1.png</code> のような名前で保存。投稿には、この画像を添えます。</p>
+    </div>
+  </div>
+  <div class="pair rev">
+    <div class="win" role="img" aria-label=".envにAPIキーを入れる様子の再現">
+      <div class="bar"><i></i><i></i><i></i><span>.env</span></div>
+      <div class="body"><pre><span class="c-dim"># イメージ画像を作るための、OpenAIのAPIキー</span>
+<span class="hlline"><span class="c-gold">OPENAI_API_KEY</span>=<span class="c-ok">ここに自分のAPIキー</span></span></pre></div>
+    </div>
+    <div>
+      <span class="tag me">最初に1回だけ</span>
+      <h3 class="step">画像生成の準備は、キーを1つ入れるだけ</h3>
+      <p>OpenAIのサイト（platform.openai.com）で、APIキーを作成。作ったキーは、<code>.env</code> の <code>OPENAI_API_KEY</code> に貼り付けます。料金は、使った分だけかかる従量課金。利用の条件や残高は、OpenAIの画面の案内に従ってください。</p>
+      <div class="ext-row"><a class="ext" href="https://platform.openai.com/api-keys" target="_blank" rel="noopener noreferrer">OpenAIでAPIキーを作る</a></div>
+      <p>キーがないときは、画像のステップだけを飛ばして、投稿文まで作成。あとから入れても、問題なし。</p>
+      <p class="note">キーも、あなた専用の鍵。<code>.env</code> と同じく、人に見せるのは禁物です。</p>
+    </div>
+  </div>
+</section>
+
+<section id="daily">
+  <div class="sec-head"><div class="no">PART 5　毎日の手順</div><h2>自動で動く流れを、画面で見る</h2><p>下の画面は、キットを実際に動かしたときの出力をもとにした再現。商品名などは見本。「再生」を押すと、流れを順に見られます。</p></div>
+
+  <div class="player" id="player">
+    <div class="pl-ctrl">
+      <button class="btn" id="play" type="button">▶ 流れを再生する</button>
+      <button class="btn ghost" id="showall" type="button">すべて表示</button>
+      <span class="hint" id="hint">いまは全体を表示しています</span>
+    </div>
+    <div class="mode" role="group" aria-label="始め方"><button type="button" class="seg on" id="m-auto">予約で自動</button><button type="button" class="seg" id="m-talk">話しかけて始める</button><button type="button" class="seg" id="m-slash">/room で始める</button></div>
+    <ol class="chips" id="chips"><li>1 自動で起動</li><li>2 売れ筋を調べる</li><li>3 投稿文</li><li>4 画像</li><li>5 投稿</li></ol>
+    <div class="win term" role="region" aria-label="毎日の操作画面の再現">
+      <div class="bar"><i></i><i></i><i></i><span>rakuten-room-kit — claude</span></div>
+      <div class="body" id="stage" aria-live="polite"></div>
+    </div>
+  </div>
+
+  <div class="pair" style="margin-top:44px">
+    <div>
+      <span class="tag ai">Claudeが進める</span>
+      <h3 class="step">手順2　売れ筋と人気の商品を、Claudeが選ぶ</h3>
+      <p>楽天の公式APIから届くのは、売れ行きをもとにしたランキング。ここから、順位が高く、レビューの件数が多く、評価の高い4件をClaudeが選びます。重複した商品は、記録をもとに除外。</p>
+      <p>医薬品、サプリ、化粧品、健康器具は、表現のルールがむずかしいため、候補から外しています。</p>
+      <p class="note">選ぶ基準を変えたいときは、「もっと安いものを中心に」のように、Claudeに頼むだけです。</p>
+    </div>
+    <div>
+      <span class="tag ai">Claudeが進める</span>
+      <h3 class="step">手順3　投稿文と画像が出来上がる</h3>
+      <p>保存されるのは、120〜200文字の投稿文、ハッシュタグ（最大3つ）、最後に【PR】の1行。4本分が <code>today/posts.txt</code> に入ります。続けて、添える画像も <code>today/image_1.png</code> のように保存。</p>
+      <p>書かれる内容は、商品の種類、セット内容、価格、レビューの平均と件数といった、取得した事実のみ。使ったことがあるかのような表現は、入りません。</p>
+      <p class="note">「もう少し短く」と頼めば、直しは完了。直したあとも、書き方のルールは守られます。</p>
+    </div>
+  </div>
+
+  <div class="pair" style="align-items:center">
+    <div class="phone-grid" style="grid-column:1/-1">
+      <div>
+        <span class="tag me">自分で行う</span>
+        <h3 class="step">手順5　貼り付けて、投稿する</h3>
+        <div class="phone-steps">
+          <div><b>1</b><p>スマホの同期フォルダにある、今日の投稿文と画像を開く。同期していないときは、パソコンの <code>today</code> フォルダを使用。</p></div>
+          <div><b>2</b><p>文章を長押しして、コピー。パソコンなら、<code>python3 room_tools.py clip 1</code> でもコピーできます。</p></div>
+          <div><b>3</b><p>ROOMアプリで、その商品を選び、文章を貼り付けて、画像を添えて、投稿ボタンを押す。</p></div>
+        </div>
+      </div>
+      <div class="phone" id="sc-phone" role="img" aria-label="投稿画面のイメージ。投稿文が入力され、投稿ボタンが押される">
+        <div class="screen">
+          <div class="top"><span>新しい投稿</span><span>投稿</span></div>
+          <div class="shot"><em>生成したイメージ画像</em><span class="flash"></span></div>
+          <div class="txt">
+            <p id="ph-t">作り置きの保存場所に困っている方へ。ステンレス製の保存容器、3個セットの紹介。レビュー平均は4.52、120件の声が集まっています。価格は1,024円。気になった方は、商品ページでサイズや内容の確認を。ジャンルはキッチン用品。</p>
+            <p class="tags" id="ph-h">#キッチン収納 #作り置き #保存容器</p>
+            <p class="pr" id="ph-p">【PR】</p>
+          </div>
+          <div class="toast" id="ph-toast">投稿しました</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p class="note" style="margin-top:0">上の画面は、説明のための再現イメージ。ROOMアプリの実際の見た目とは、異なります。</p>
+</section>
+
+<section id="after">
+  <div class="sec-head"><div class="no">PART 6　投稿のあと</div><h2>週に1回、10分だけ見直す</h2></div>
+  <div class="how">
+    <div><b>記録を消さない</b>フォルダの <code>history.txt</code> が、表示した商品を自動で記憶。消すと、同じ商品がまた候補に出ます。</div>
+    <div><b>数字を見直す</b>週末に、売れた商品とクリックの数を確認。その数字をClaudeに見せると、来週のジャンル案が整理されます。</div>
+    <div><b>報酬のしくみ</b>報酬額は、購入額に料率（2〜4%）をかけた金額。対象は、リンクのクリックから24時間以内にカートへ入り、89日以内に購入された分。</div>
+  </div>
+</section>
+
+<section id="rules">
+  <div class="sec-head"><div class="no">PART 7　規約のために</div><h2>このやり方を守る理由と、守ること</h2><p>投稿、いいね、フォローの自動化は、アカウント停止や報酬取り消しにつながるおそれ。このガイドは、そこに踏み込まない設計です。</p></div>
+  <div class="cols">
+    <div class="col no"><h3>しないこと</h3><ul>
+      <li>投稿、いいね、フォロー、コメントの自動実行（ブラウザ操作や拡張機能も含む）</li>
+      <li>楽天のサイトから、情報を抜き取ること</li>
+      <li>他人の投稿、商品説明、レビューを写すこと</li>
+      <li>楽天の商品画像を、保存して使うこと</li>
+      <li>アフィリエイトリンクを自分で作る、変える、送る</li>
+      <li>使ったことがあるかのような表現（「使ってみた」「愛用」「買って良かった」など）</li>
+      <li>複数アカウントの運用、家族や友人への購入の依頼</li>
+    </ul></div>
+    <div class="col yes"><h3>守ること</h3><ul>
+      <li>投稿文は120〜200文字、ハッシュタグは最大3つ</li>
+      <li>最後に【PR】を入れる</li>
+      <li>商品の種類、価格、レビューなど、取得した事実だけを書く</li>
+      <li>渡した情報にない数字、効果、順位は書かない</li>
+      <li>「最高」「No.1」「絶対」などの断定は使わない</li>
+      <li>他の商品との比較や、悪く言う表現はしない</li>
+      <li>画像は、文字を入れず、商品の実物を描かない、イメージ画像にする</li>
+    </ul></div>
+  </div>
+  <p class="note" style="margin-top:28px">体や肌への効果を語る表現は、薬機法という法律に触れるおそれ。このキットは、医薬品、サプリ、化粧品、健康器具を候補から外す設定です。迷ったときの合言葉は、「取得した事実だけを、使ったかのように書かずに伝えているか」。</p>
+</section>
+
+<section id="kit">
+  <div class="sec-head"><div class="no">PART 8　キット</div><h2>キットの中身は、ファイル6つ</h2><p>ボタンを押すだけで、6つのファイルがそろったzipを入手。タブから、中身をコピーして保存する方法もあります。</p><div class="ext-row"><button type="button" class="ext dl zipdl">キット一式（zip）をダウンロードする</button><small class="zipmsg" aria-live="polite">6つのファイルが、フォルダの形のまま入ったzipを作成。ダウンロード後は、解凍して使用。</small></div></div>
+  <div class="kit">
+    <p style="margin:0;font-size:14.5px">フォルダ名のおすすめは <code>rakuten-room-kit</code>。<code>room.md</code> だけは、フォルダの中に <code>.claude/commands/</code> を作り、その中へ置きます。</p>
+    <div class="tree win" id="sc-tree"><div class="bar"><span>フォルダの形</span></div><div class="body"><pre><span class="tr">rakuten-room-kit/</span>
+<span class="tr">├─ room_tools.py</span>
+<span class="tr">├─ CLAUDE.md</span>
+<span class="tr">├─ run_daily.sh / .bat  <span class="c-dim">← 毎朝の自動実行用</span></span>
+<span class="tr">├─ .env            <span class="c-dim">← 自分で作る（鍵が入る）</span></span>
+<span class="tr">└─ .claude/</span>
+<span class="tr">   └─ commands/</span>
+<span class="tr">      └─ room.md</span></pre></div></div>
+    <div class="tabs" role="tablist" aria-label="キットのファイル"><button role="tab" type="button" id="tab0" aria-selected="true" aria-controls="pn0">room_tools.py</button><button role="tab" type="button" id="tab1" aria-selected="false" aria-controls="pn1">CLAUDE.md</button><button role="tab" type="button" id="tab2" aria-selected="false" aria-controls="pn2">.claude/commands/room.md</button><button role="tab" type="button" id="tab3" aria-selected="false" aria-controls="pn3">.env.example</button><button role="tab" type="button" id="tab4" aria-selected="false" aria-controls="pn4">run_daily.sh</button><button role="tab" type="button" id="tab5" aria-selected="false" aria-controls="pn5">run_daily.bat</button></div>
+    <div class="panel" id="pn0" role="tabpanel"><button class="copy" type="button" data-for="code0">コピー</button><div class="win"><div class="bar"><span>room_tools.py</span></div><div class="body"><pre id="code0">#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+&quot;&quot;&quot;楽天ROOM 投稿準備ツール（Python標準ライブラリのみ）
+
+使い方
+  python3 room_tools.py fetch        楽天公式のランキングAPIから商品候補を取得
+  python3 room_tools.py shown 1 3    画面に出した商品を記録（次回から候補に出さない）
+  python3 room_tools.py clip 1       today/posts.txt の1本目をクリップボードにコピー
+  python3 room_tools.py image 1 &quot;文章&quot;  1本目に添えるイメージ画像を生成して today/image_1.png に保存
+
+このツールは、ROOMへの投稿、いいね、フォロー、スクレイピングを一切行いません。
+投稿は、必ず本人がROOMアプリで手作業します。
+&quot;&quot;&quot;
+import datetime
+import json
+import os
+import platform
+import re
+import shutil
+import subprocess
+import sys
+import time
+import urllib.error
+import urllib.parse
+import urllib.request
+from pathlib import Path
+
+BASE = Path(__file__).resolve().parent
+TODAY = BASE / &quot;today&quot;
+HISTORY = BASE / &quot;history.txt&quot;
+DEFAULT_URL = &quot;https://openapi.rakuten.co.jp/ichibaranking/api/IchibaItem/Ranking/20220601&quot;
+ELEMENTS = (&quot;rank,itemName,itemCode,itemPrice,itemUrl,shopName,&quot;
+            &quot;affiliateRate,reviewCount,reviewAverage,availability&quot;)
+
+HINTS = {
+    400: &quot;設定値の形式が違うかもしれません。GENRE_IDSの数字を確認してください。&quot;,
+    403: &quot;アプリ登録のWebサイトURLと、.envのRAKUTEN_REFERERが一致しているか確認してください。&quot;
+         &quot;アプリIDとアクセスキーの組み合わせも確認してください。&quot;,
+    404: &quot;このジャンルのデータが見つかりません。GENRE_IDSの数字を見直してください。&quot;,
+    429: &quot;短時間にアクセスしすぎました。しばらく待ってからやり直してください。&quot;,
+}
+
+
+class ApiError(Exception):
+    pass
+
+
+def load_env():
+    p = BASE / &quot;.env&quot;
+    if not p.exists():
+        return
+    for line in p.read_text(encoding=&quot;utf-8&quot;).splitlines():
+        line = line.strip()
+        if not line or line.startswith(&quot;#&quot;) or &quot;=&quot; not in line:
+            continue
+        k, v = line.split(&quot;=&quot;, 1)
+        os.environ.setdefault(k.strip(), v.strip().strip(&#x27;&quot;&#x27;).strip(&quot;&#x27;&quot;))
+
+
+def seen_codes():
+    s = set()
+    if HISTORY.exists():
+        for line in HISTORY.read_text(encoding=&quot;utf-8&quot;).splitlines():
+            code = line.split(&quot;\t&quot;)[0].strip()
+            if code:
+                s.add(code)
+    return s
+
+
+def call_api(url, genre, page):
+    q = {
+        &quot;applicationId&quot;: os.environ[&quot;RAKUTEN_APP_ID&quot;],
+        &quot;accessKey&quot;: os.environ[&quot;RAKUTEN_ACCESS_KEY&quot;],
+        &quot;genreId&quot;: genre,
+        &quot;page&quot;: page,
+        &quot;formatVersion&quot;: 2,
+        &quot;elements&quot;: ELEMENTS,
+    }
+    req = urllib.request.Request(
+        url + &quot;?&quot; + urllib.parse.urlencode(q),
+        headers={&quot;Referer&quot;: os.environ[&quot;RAKUTEN_REFERER&quot;]},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=30) as r:
+            data = json.loads(r.read().decode(&quot;utf-8&quot;))
+    except urllib.error.HTTPError as e:
+        body = e.read().decode(&quot;utf-8&quot;, &quot;replace&quot;)[:200]
+        raise ApiError(&quot;ジャンル%sで取得に失敗しました 状態%s %s\n%s&quot; % (genre, e.code, body, HINTS.get(e.code, &quot;&quot;)))
+    except urllib.error.URLError as e:
+        raise ApiError(&quot;ネットワークに接続できませんでした %s&quot; % e.reason)
+    time.sleep(1.5)  # 公式の注意に合わせて、続けて呼びすぎない
+    return [i.get(&quot;item&quot;, i) for i in data.get(&quot;items&quot;, [])]
+
+
+def fetch():
+    load_env()
+    miss = [k for k in (&quot;RAKUTEN_APP_ID&quot;, &quot;RAKUTEN_ACCESS_KEY&quot;, &quot;RAKUTEN_REFERER&quot;)
+            if not os.environ.get(k) or &quot;ここに&quot; in os.environ.get(k, &quot;&quot;)]
+    if miss:
+        print(&quot;未設定の項目があります &quot; + &quot;, &quot;.join(miss))
+        print(&quot;.envファイルを開いて、値を入れてください。&quot;)
+        sys.exit(2)
+
+    genres = [g.strip() for g in os.environ.get(&quot;GENRE_IDS&quot;, &quot;215783,558944,551167,100227&quot;).split(&quot;,&quot;) if g.strip()]
+    per_genre = int(os.environ.get(&quot;PER_GENRE&quot;, &quot;3&quot;))
+    max_pages = int(os.environ.get(&quot;MAX_PAGES&quot;, &quot;3&quot;))
+    min_review = float(os.environ.get(&quot;MIN_REVIEW&quot;, &quot;4.0&quot;))
+    url = os.environ.get(&quot;RAKUTEN_API_URL&quot;) or DEFAULT_URL
+
+    seen = seen_codes()
+    picked, errors = [], []
+    codes_now = set()
+    for g in genres:
+        got = 0
+        for page in range(1, max_pages + 1):
+            if got &gt;= per_genre:
+                break
+            try:
+                items = call_api(url, g, page)
+            except ApiError as e:
+                errors.append(str(e))
+                break
+            if not items:
+                break
+            for it in items:
+                if got &gt;= per_genre:
+                    break
+                code = it.get(&quot;itemCode&quot;)
+                if not code or code in seen or code in codes_now:
+                    continue
+                if str(it.get(&quot;availability&quot;, &quot;1&quot;)) == &quot;0&quot;:
+                    continue
+                rv = it.get(&quot;reviewAverage&quot;)
+                if rv not in (None, &quot;&quot;) and float(rv) &lt; min_review:
+                    continue
+                codes_now.add(code)
+                got += 1
+                picked.append({
+                    &quot;idx&quot;: len(picked) + 1,
+                    &quot;code&quot;: code,
+                    &quot;name&quot;: it.get(&quot;itemName&quot;, &quot;&quot;),
+                    &quot;price&quot;: it.get(&quot;itemPrice&quot;),
+                    &quot;url&quot;: it.get(&quot;itemUrl&quot;, &quot;&quot;),
+                    &quot;shop&quot;: it.get(&quot;shopName&quot;, &quot;&quot;),
+                    &quot;rate&quot;: it.get(&quot;affiliateRate&quot;, &quot;&quot;),
+                    &quot;review_avg&quot;: it.get(&quot;reviewAverage&quot;, &quot;&quot;),
+                    &quot;review_count&quot;: it.get(&quot;reviewCount&quot;, &quot;&quot;),
+                    &quot;genre&quot;: g,
+                })
+
+    for e in errors:
+        print(e)
+    if not picked:
+        print(&quot;候補を取得できませんでした。&quot;)
+        sys.exit(1)
+
+    TODAY.mkdir(exist_ok=True)
+    (TODAY / &quot;candidates.json&quot;).write_text(json.dumps(picked, ensure_ascii=False, indent=1), encoding=&quot;utf-8&quot;)
+    print(&quot;番号\t商品名\t価格\t料率\tレビュー\tショップ&quot;)
+    for c in picked:
+        rv = &quot;%s(%s件)&quot; % (c[&quot;review_avg&quot;], c[&quot;review_count&quot;]) if c[&quot;review_avg&quot;] != &quot;&quot; else &quot;なし&quot;
+        rate = c[&quot;rate&quot;] if c[&quot;rate&quot;] != &quot;&quot; else &quot;-&quot;
+        print(&quot;%d\t%s\t%s円\t%s\t%s\t%s&quot; % (c[&quot;idx&quot;], c[&quot;name&quot;][:42], c[&quot;price&quot;], rate, rv, c[&quot;shop&quot;]))
+
+
+def mark(status, nums):
+    f = TODAY / &quot;candidates.json&quot;
+    if not f.exists():
+        print(&quot;先に fetch を実行してください。&quot;)
+        sys.exit(1)
+    cands = {c[&quot;idx&quot;]: c for c in json.loads(f.read_text(encoding=&quot;utf-8&quot;))}
+    now = datetime.date.today().isoformat()
+    lines = []
+    for n in nums:
+        c = cands.get(int(n))
+        if not c:
+            print(&quot;番号%sは候補にありません&quot; % n)
+            continue
+        lines.append(&quot;%s\t%s\t%s\t%s&quot; % (c[&quot;code&quot;], now, status, c[&quot;name&quot;]))
+    if lines:
+        with HISTORY.open(&quot;a&quot;, encoding=&quot;utf-8&quot;) as h:
+            h.write(&quot;\n&quot;.join(lines) + &quot;\n&quot;)
+    print(&quot;%d件を記録しました（%s）&quot; % (len(lines), status))
+
+
+def copy_text(t):
+    name = platform.system()
+    try:
+        if name == &quot;Darwin&quot;:
+            subprocess.run([&quot;pbcopy&quot;], input=t.encode(&quot;utf-8&quot;), check=True)
+            return True
+        if name == &quot;Windows&quot;:
+            subprocess.run([&quot;clip&quot;], input=b&quot;\xff\xfe&quot; + t.encode(&quot;utf-16le&quot;), check=True)
+            return True
+        for cmd in ([&quot;wl-copy&quot;], [&quot;xclip&quot;, &quot;-selection&quot;, &quot;clipboard&quot;], [&quot;xsel&quot;, &quot;--clipboard&quot;, &quot;--input&quot;]):
+            if shutil.which(cmd[0]):
+                subprocess.run(cmd, input=t.encode(&quot;utf-8&quot;), check=True)
+                return True
+    except Exception:
+        return False
+    return False
+
+
+def clip(n):
+    f = TODAY / &quot;posts.txt&quot;
+    if not f.exists():
+        print(&quot;today/posts.txt がまだありません。&quot;)
+        sys.exit(1)
+    blocks = [b.strip() for b in re.split(r&quot;(?m)^=====\s*$&quot;, f.read_text(encoding=&quot;utf-8&quot;)) if b.strip()]
+    if n &lt; 1 or n &gt; len(blocks):
+        print(&quot;投稿文は全部で%d本です。&quot; % len(blocks))
+        sys.exit(1)
+    text = blocks[n - 1]
+    ok = copy_text(text)
+    print(text)
+    print(&quot;\n&quot; + (&quot;クリップボードにコピーしました。ROOMアプリに貼り付けてください。&quot;
+                  if ok else &quot;自動コピーできませんでした。上の文章を選んでコピーしてください。&quot;))
+
+
+def image(n, prompt):
+    &quot;&quot;&quot;OpenAIの画像生成APIで、イメージ画像を作ります（.env の OPENAI_API_KEY が必要）。&quot;&quot;&quot;
+    import base64
+    load_env()
+    key = os.environ.get(&quot;OPENAI_API_KEY&quot;, &quot;&quot;)
+    if not key or &quot;ここに&quot; in key:
+        print(&quot;OPENAI_API_KEY が未設定です。.envに入れると、画像を作れます。画像なしでも、投稿文は使えます。&quot;)
+        sys.exit(2)
+    model = os.environ.get(&quot;OPENAI_IMAGE_MODEL&quot;, &quot;gpt-image-1&quot;)
+    size = os.environ.get(&quot;OPENAI_IMAGE_SIZE&quot;, &quot;1024x1024&quot;)
+    url = os.environ.get(&quot;OPENAI_API_URL&quot;) or &quot;https://api.openai.com/v1/images/generations&quot;
+    body = json.dumps({&quot;model&quot;: model, &quot;prompt&quot;: prompt, &quot;size&quot;: size, &quot;n&quot;: 1}).encode(&quot;utf-8&quot;)
+    req = urllib.request.Request(url, data=body, headers={
+        &quot;Content-Type&quot;: &quot;application/json&quot;, &quot;Authorization&quot;: &quot;Bearer &quot; + key})
+    try:
+        with urllib.request.urlopen(req, timeout=180) as r:
+            data = json.loads(r.read().decode(&quot;utf-8&quot;))
+        item = data[&quot;data&quot;][0]
+        if item.get(&quot;b64_json&quot;):
+            raw = base64.b64decode(item[&quot;b64_json&quot;])
+        else:
+            with urllib.request.urlopen(item[&quot;url&quot;], timeout=60) as r2:
+                raw = r2.read()
+    except urllib.error.HTTPError as e:
+        print(&quot;画像の生成に失敗しました 状態%s %s&quot; % (e.code, e.read().decode(&quot;utf-8&quot;, &quot;replace&quot;)[:200]))
+        print(&quot;APIキー、利用の条件、残高を、OpenAIの画面で確認してください。&quot;)
+        sys.exit(1)
+    except (urllib.error.URLError, KeyError, IndexError, ValueError) as e:
+        print(&quot;画像の生成に失敗しました %s&quot; % e)
+        sys.exit(1)
+    TODAY.mkdir(exist_ok=True)
+    out = TODAY / (&quot;image_%d.png&quot; % n)
+    out.write_bytes(raw)
+    print(&quot;%s に保存しました&quot; % out.relative_to(BASE))
+
+
+def main():
+    if len(sys.argv) &lt; 2:
+        print(__doc__)
+        return
+    cmd = sys.argv[1]
+    if cmd == &quot;fetch&quot;:
+        fetch()
+    elif cmd in (&quot;shown&quot;, &quot;done&quot;):
+        mark(&quot;表示済み&quot; if cmd == &quot;shown&quot; else &quot;投稿済み&quot;, sys.argv[2:])
+    elif cmd == &quot;clip&quot; and len(sys.argv) &gt;= 3:
+        clip(int(sys.argv[2]))
+    elif cmd == &quot;image&quot; and len(sys.argv) &gt;= 4:
+        image(int(sys.argv[2]), &quot; &quot;.join(sys.argv[3:]))
+    else:
+        print(__doc__)
+
+
+if __name__ == &quot;__main__&quot;:
+    main()
+</pre></div></div></div><div class="panel" id="pn1" role="tabpanel" hidden><button class="copy" type="button" data-for="code1">コピー</button><div class="win"><div class="bar"><span>CLAUDE.md</span></div><div class="body"><pre id="code1"># 楽天ROOM 投稿準備フォルダのルール
+
+このフォルダでは、楽天ROOMの投稿準備だけを手伝います。
+投稿そのものは、必ず本人がROOMアプリで手作業します。
+
+`/room` と入力されたときも、「今日の投稿を作って」「今日の分」「投稿の準備」のように話しかけられたときも、同じ流れで進めます。
+流れは `.claude/commands/room.md` の6つの手順です。毎回、先頭の手順から順番に実行します。
+途中で本人に質問はしません。予約実行（run_daily.sh、run_daily.bat）で呼ばれたときも、同じです。
+投稿そのものは、本人がROOMアプリで行います。
+
+## 絶対にしないこと
+- ROOMへの投稿、いいね、フォロー、コメントの自動実行（ブラウザ操作、画面操作、Claude in Chrome、拡張機能、スクリプトを使う方法を含む）
+- 楽天のサイトから情報を抜き取ること（情報の取得は、公式APIの `room_tools.py fetch` だけ）
+- 他人の投稿、商品ページの説明文、みんなのレビューを写すこと
+- 楽天のページにある画像の、スクリーンショットやダウンロードの利用
+- アフィリエイトリンクを作る、変える、メールやメッセージで送ること
+- 使ったことがあるかのように書くこと（「使ってみた」「愛用」「買って良かった」「おすすめです」などの体験や推薦の表現）
+- 複数アカウントの運用や、家族や友人に購入を頼む案内
+
+## 画像の作り方
+- 画像は、`room_tools.py image` で作る、イメージ画像だけ
+- 文字を入れない。商品の実物は描かない。楽天の画像を参照したり、加工したりしない
+- イラスト調で、やわらかい光にする
+
+## 投稿文の書き方
+- 1本は120〜200文字
+- です・ます調に体言止めを混ぜて、語尾が続けて同じにならないようにする
+- 最初の1文は、読んだ人の困りごとや関心から入る（例「作り置きの保存場所に困っている方へ」）
+- 書いてよいのは、取得した事実だけ。商品の種類、セット内容、価格、レビュー平均、レビュー件数
+- 商品ページの文章は写さず、渡された事実だけを自分の言葉で言い換える
+- 渡された情報にない数字、効果、ランキング、受賞歴は書かない
+- 病気や症状への効果、肌や体が変わるといった効能の表現は使わない
+- 「最高」「No.1」「絶対」などの断定は使わない
+- 他の商品や他社との比較、悪く言う表現はしない
+- ハッシュタグは最大3つ
+- ダッシュ記号や、飾りのコロンは使わない
+- 「AではなくB」のような言い切りの型は使わない
+- 末尾に【PR】の1行を付ける
+
+## ファイル
+- `room_tools.py` 候補の取得、記録、コピーを行う道具
+- `.env` アプリID、アクセスキー、登録したWebサイトURL（外に出さない。チャットにも貼らない）
+- `today/` 今日の候補と投稿文
+- `history.txt` 表示済みの記録（同じ商品を何度も出さないため。自動で書き込まれる）
+</pre></div></div></div><div class="panel" id="pn2" role="tabpanel" hidden><button class="copy" type="button" data-for="code2">コピー</button><div class="win"><div class="bar"><span>.claude/commands/room.md</span></div><div class="body"><pre id="code2">---
+description: 今日の楽天ROOM投稿を準備する（売れ筋の商品探しから投稿文づくりまで）
+---
+
+今日の楽天ROOMの投稿準備を進めます。CLAUDE.md のルールを必ず守ってください。
+投稿は本人が手作業で行います。ROOMや楽天のサイトは、ブラウザでも画面操作でも操作しないでください。
+
+次の順に進めてください。途中で本人に質問する必要はありません。投稿が終わったかどうかも、確認しません。
+
+1 `.env` がなければ、`.env.example` をコピーして `.env` を作ります。
+  アプリID、アクセスキー、登録したWebサイトURLの3つを本人が入れるよう、やさしく案内して、そこで止めます。
+
+2 `python3 room_tools.py fetch` を実行します（Windowsでは `python` や `py` のことがあります）。
+  失敗したら、原因と直し方をやさしい日本語で説明して止めます。Pythonがなければ、入れ方を案内します。
+
+3 取得した候補から、売れ行きがよく、人気のある4件を選びます。選ぶ基準は次のとおりです。
+  ランキングの順位が高い、レビュー件数が多い、レビュー平均が高い、価格が極端に高くない。
+  効能や効果を語りやすい商品は避ける（医薬品、サプリ、化粧品、健康器具は除く）。
+  選んだ4件の番号で `python3 room_tools.py shown 番号...` を実行します。
+
+4 選んだ4件それぞれについて、1商品につき1本の投稿文を作り、`today/posts.txt` に書きます。
+  商品と商品の間は、`=====` だけの行で区切ります。
+  使ったことがあるかのような表現は、使いません。書けるのは、取得した事実だけです。
+  1本は、紹介文（120〜200文字）、ハッシュタグ（最大3つ）、最後に【PR】の1行です。
+
+5 4本それぞれに添える、イメージ画像を作ります。
+  商品の種類から連想する、雰囲気の伝わる絵にします。次の条件を守ったプロンプトを、日本語で1本ずつ作ります。
+  文字は入れない。商品の実物は描かない。楽天の画像を参照したり、加工したりしない。イラスト調で、やわらかい光にする。
+  `python3 room_tools.py image 番号 &quot;プロンプト&quot;` を実行して、`today/image_番号.png` に保存します。
+  OPENAI_API_KEY が未設定で止まった場合は、画像は作らず、そのことだけを伝えて次へ進みます。
+
+6 画面に次の3つを表示します。
+  4本の投稿文の一覧（商品名と、1行の要約）
+  作った画像のファイル名（today フォルダの image_番号.png）
+  次にやること（`python3 room_tools.py clip 1` で1本目をコピーして、ROOMアプリで商品を選び、文章と画像を添えて投稿する）
+</pre></div></div></div><div class="panel" id="pn3" role="tabpanel" hidden><button class="copy" type="button" data-for="code3">コピー</button><div class="win"><div class="bar"><span>.env.example</span></div><div class="body"><pre id="code3"># 楽天ウェブサービスのアプリ登録画面で確認できる値を入れます
+RAKUTEN_APP_ID=ここにアプリID
+RAKUTEN_ACCESS_KEY=ここにアクセスキー
+# アプリ登録のときに入れたWebサイトURLと、同じものにします
+RAKUTEN_REFERER=https://ここに登録したURL/
+
+# 取得するジャンル（カンマ区切り）
+# 215783 日用品雑貨・文房具・手芸 / 558944 キッチン用品・食器・調理器具 / 551167 スイーツ・お菓子 / 100227 食品
+GENRE_IDS=215783,558944,551167,100227
+
+# 1ジャンルあたりの候補数、レビュー平均の下限
+PER_GENRE=3
+MIN_REVIEW=4.0
+
+# イメージ画像を作るための、OpenAIのAPIキー（任意。なくても投稿文は作れます）
+OPENAI_API_KEY=ここに自分のAPIキー
+</pre></div></div></div>
+    <div class="panel" id="pn4" role="tabpanel" hidden><button class="copy" type="button" data-for="code4">コピー</button><div class="win"><div class="bar"><span>run_daily.sh</span></div><div class="body"><pre id="code4">#!/bin/sh
+# 毎日の自動実行用です（Mac / Linux）。
+# 商品探し、投稿文、イメージ画像づくりまでを、Claudeが自動で行います。
+# ROOMへの投稿は行いません。投稿は、必ず自分の手で行います。
+
+cd &quot;$(dirname &quot;$0&quot;)&quot; || exit 1
+# 予約実行では、claude の場所が見つからないことがあるため、よくある場所を足しておきます
+PATH=&quot;$HOME/.local/bin:/usr/local/bin:/opt/homebrew/bin:$PATH&quot;
+mkdir -p today
+LOG=&quot;today/run.log&quot;
+echo &quot;=== $(date &#x27;+%Y-%m-%d %H:%M:%S&#x27;) 開始 ===&quot; &gt;&gt; &quot;$LOG&quot;
+
+claude -p &quot;今日の投稿を作って。途中で質問はせず、.claude/commands/room.md の手順1から6まで進めてください。投稿はしません。&quot; \
+  --allowedTools &quot;Read&quot; &quot;Write&quot; &quot;Edit&quot; \
+  &quot;Bash(python3 room_tools.py:*)&quot; &quot;Bash(python room_tools.py:*)&quot; &quot;Bash(py room_tools.py:*)&quot; \
+  &gt;&gt; &quot;$LOG&quot; 2&gt;&amp;1
+STATUS=$?
+
+# 任意: スマホで見られるように、同期されるフォルダへコピーします
+# .env に SYNC_DIR=/Users/自分の名前/Dropbox のように書くと、有効になります
+SYNC_DIR=$(grep &#x27;^SYNC_DIR=&#x27; .env 2&gt;/dev/null | head -n 1 | cut -d= -f2-)
+if [ -n &quot;$SYNC_DIR&quot; ] &amp;&amp; [ -f today/posts.txt ]; then
+  cp today/posts.txt &quot;$SYNC_DIR/room_posts.txt&quot;
+  cp today/image_*.png &quot;$SYNC_DIR/&quot; 2&gt;/dev/null
+fi
+
+echo &quot;=== 終了 状態 $STATUS ===&quot; &gt;&gt; &quot;$LOG&quot;
+exit $STATUS
+</pre></div></div></div><div class="panel" id="pn5" role="tabpanel" hidden><button class="copy" type="button" data-for="code5">コピー</button><div class="win"><div class="bar"><span>run_daily.bat</span></div><div class="body"><pre id="code5">@echo off
+rem 毎日の自動実行用です（Windows）。
+rem 商品探し、投稿文、イメージ画像づくりまでを、Claudeが自動で行います。
+rem ROOMへの投稿は行いません。投稿は、必ず自分の手で行います。
+
+cd /d &quot;%~dp0&quot;
+if not exist today mkdir today
+echo === %date% %time% 開始 === &gt;&gt; today\run.log
+
+claude -p &quot;今日の投稿を作って。途中で質問はせず、.claude/commands/room.md の手順1から6まで進めてください。投稿はしません。&quot; --allowedTools &quot;Read&quot; &quot;Write&quot; &quot;Edit&quot; &quot;Bash(python room_tools.py:*)&quot; &quot;Bash(py room_tools.py:*)&quot; &quot;Bash(python3 room_tools.py:*)&quot; &gt;&gt; today\run.log 2&gt;&amp;1
+
+rem 任意: スマホで見られるように、同期されるフォルダへコピーします
+rem 下の行の先頭の rem を消して、フォルダの場所を自分のものに書き換えます
+rem copy /Y today\posts.txt &quot;C:\Users\自分の名前\Dropbox\room_posts.txt&quot;
+
+echo === 終了 === &gt;&gt; today\run.log
+</pre></div></div></div><div class="how">
+      <div><b>room_tools.py</b>候補の取得、記録、コピーを行う道具。Pythonの標準機能だけで動作。</div>
+      <div><b>CLAUDE.md</b>Claudeが守るルール。投稿の自動実行などをしない約束が書かれています。</div>
+      <div><b>.claude/commands/room.md</b>/room で始まる6つの手順。ファイルは、この場所に置きます。</div>
+    <div><b>run_daily.sh / .bat</b>毎朝の自動実行用。Claudeを呼び出し、投稿文と画像までを作成。投稿は行いません。</div>
+    </div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="sec-head"><div class="no">困ったとき</div><h2>よくある質問</h2></div>
+  <details><summary>「403」と出て、候補が取れません</summary><p>原因で多いのは、アプリ登録で入れたURLと、<code>.env</code> の <code>RAKUTEN_REFERER</code> の不一致。最後のスラッシュまで、同じ文字にそろえます。アプリIDとアクセスキーの貼り間違いも、あわせて確認を。</p></details>
+  <details><summary>「429」と出ます</summary><p>短い時間にアクセスしすぎた状態。しばらく待ってから、もう一度 <code>/room</code> を実行。連続での実行は、避けてください。</p></details>
+  <details><summary>候補が少ない、出てきません</summary><p>表示済みの商品は記録で除かれるため、続けるほど候補は減少。<code>GENRE_IDS</code> にジャンル番号を足すか、<code>MIN_REVIEW</code> を少し下げると、候補が増えます。</p></details>
+  <details><summary>Pythonがないと言われました</summary><p>Claudeに「Pythonを入れる方法を教えて」と頼むのが近道。Windowsでは、<code>python</code> や <code>py</code> という名前で動く場合があります。</p></details>
+  <details><summary>コピーがうまくいきません</summary><p>クリップボードへのコピーは、Windowsでの動作が未確認。うまくいかないときは、画面に出た文章か、<code>today</code> フォルダの <code>posts.txt</code> から、自分で選んでコピーしてください。</p></details>
+  <details><summary>使ったことがあるように書かれませんか</summary><p>書かれません。投稿文の材料は、取得した事実（商品の種類、価格、レビューの平均と件数）のみ。「使ってみた」「愛用」などの体験の表現は、入らない仕組みです。</p></details>
+  <details><summary>画像は、どんなものができますか</summary><p>商品の種類から連想する、雰囲気のイメージ画像。文字なし、商品の実物は描かず、イラスト調で、やわらかい光。条件を変えたいときは、キットの <code>room.md</code> の手順5を書き換えます。</p></details>
+  <details><summary>画像が作られません</summary><p>原因で多いのは、<code>.env</code> の <code>OPENAI_API_KEY</code> が未入力、またはOpenAI側の残高や利用条件の不足。画面に出た文は、そのままClaudeに見せてください。画像がなくても、投稿文までは作られる設計。</p></details>
+  <details><summary>予約の時間にパソコンが寝ていました</summary><p>予約が動くのは、その時刻にパソコンの電源が入っていて、スリープしていないときだけ。時間を変えたいときは、「予約の時間を朝6時に変えて」とClaudeに頼めば完了です。</p></details>
+  <details><summary>投稿文を直したいです</summary><p>「もう少し短く」「やわらかい言い方に」と頼むだけで、直しは完了。直したあとも、書き方のルールは守られます。</p></details>
+</section>
+
+<footer>
+  <p>画面の図は、キットの実際の出力をもとにした再現。商品名、ショップ名、ID、URLはすべて見本で、実在のものとは無関係です。</p>
+  <p>このガイドは、非公式の解説。楽天グループとは関係がありません。規約は改定されることがあるため、投稿の前に、楽天アフィリエイトと楽天ROOMの最新ルールの確認を。報酬の例や料率は、確認した時点の情報です。</p>
+</footer>
+</div>
+
+<script>
+(function(){
+var root=document.documentElement;
+function $(i){return document.getElementById(i)}
+function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+$('theme').addEventListener('click',function(){
+  var cur=root.getAttribute('data-theme');
+  var sys=window.matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+  var now=cur||sys; root.setAttribute('data-theme',now==='dark'?'light':'dark');
+});
+var tabs=document.querySelectorAll('.tabs button'),panels=document.querySelectorAll('.panel');
+tabs.forEach(function(t){t.addEventListener('click',function(){
+  tabs.forEach(function(x){x.setAttribute('aria-selected',x===t?'true':'false')});
+  panels.forEach(function(p){p.hidden=p.id!==t.getAttribute('aria-controls')});
+})});
+document.querySelectorAll('.copy').forEach(function(b){b.addEventListener('click',function(){
+  var pre=$(b.getAttribute('data-for')),txt=pre.textContent;
+  function ok(){var o=b.textContent;b.textContent='コピーしました';setTimeout(function(){b.textContent=o},1600)}
+  function fb(){var r=document.createRange();r.selectNodeContents(pre);var s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='選択しました。コピーしてください'}
+  try{navigator.clipboard.writeText(txt).then(ok,fb)}catch(e){fb()}
+})});
+
+/* ---------- scene runner ---------- */
+function scene(elId,fn,final){
+  var el=$(elId); if(!el)return;
+  var orig=el.innerHTML,token=0,running=false;
+  function ctx(my){return{
+    alive:function(){return my===token},
+    wait:function(ms){return sleep(ms)},
+    type:async function(id,text,sp){var n=$(id);if(!n)return;n.textContent='';for(var i=1;i<=text.length;i++){if(my!==token)return;n.textContent=text.slice(0,i);await sleep(sp||55)}}
+  }}
+  async function loop(my){
+    var c=ctx(my);
+    while(my===token){
+      try{await fn(c)}catch(e){}
+      if(my!==token)return;
+      await sleep(2200);
+    }
+  }
+  function stop(){token++;running=false;el.innerHTML=orig;if(final)final()}
+  function start(){if(running)return;running=true;var my=++token;loop(my)}
+  if(final)final();
+  if(reduce||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)start();else if(running)stop()})},{threshold:.35}).observe(el);
+}
+function vis(id,on){var n=$(id);if(n)n.style.visibility=on?'visible':'hidden'}
+
+scene('sc-boot',async function(c){
+  $('b1').textContent='';vis('bl2',0);vis('bbox',0);vis('btip',0);vis('bp',0);$('b3').textContent='';
+  $('bc1').classList.add('on');
+  await c.type('b1','cd rakuten-room-kit',50);$('bc1').classList.remove('on');await c.wait(450);
+  vis('bl2',1);$('b2').textContent='';$('bc2').classList.add('on');
+  await c.type('b2','claude',90);$('bc2').classList.remove('on');await c.wait(800);
+  vis('bbox',1);await c.wait(800);vis('btip',1);await c.wait(700);
+  vis('bp',1);await c.type('b3','今日の投稿を作って',90);await c.wait(2600);
+});
+scene('sc-form',async function(c){
+  $('f1').textContent='';$('f2').textContent='';$('keybox').style.opacity=.15;
+  await c.wait(500);await c.type('f1','my-room-helper',70);await c.wait(300);
+  await c.type('f2','https://example.com/',55);await c.wait(700);
+  $('keybox').style.transition='opacity .6s';$('keybox').style.opacity=1;await c.wait(2400);
+});
+scene('sc-env',async function(c){
+  $('e1').textContent='';$('e2').textContent='';$('e3').textContent='';
+  await c.wait(500);
+  await c.type('e1','1234567890123456789',45);await c.wait(250);
+  await c.type('e2','xxxxxxxx-xxxx-xxxx',45);await c.wait(250);
+  await c.type('e3','https://example.com/',45);await c.wait(2400);
+});
+scene('sc-tree',async function(c){
+  var rows=document.querySelectorAll('#sc-tree .tr');
+  rows.forEach(function(r){r.classList.add('hide')});
+  for(var i=0;i<rows.length;i++){await c.wait(380);if(!c.alive())return;rows[i].classList.remove('hide')}
+  await c.wait(2200);
+});
+function chatFinal(){
+  var li=document.querySelectorAll('#tasks li');
+  li.forEach(function(x){x.className='ok'});
+}
+scene('sc-chat',async function(c){
+  var li=document.querySelectorAll('#tasks li'),turn=$('turn');
+  li.forEach(function(x){x.className=''});turn.style.visibility='hidden';
+  $('ch-u').textContent='';
+  await c.type('ch-u','今日の投稿を作って',90);await c.wait(500);
+  for(var i=0;i<li.length;i++){if(!c.alive())return;li[i].className='run';await c.wait(1000);li[i].className='ok'}
+  turn.style.visibility='visible';await c.wait(2800);
+},chatFinal);
+var PH='作り置きの保存場所に困っている方へ。ステンレス製の保存容器、3個セットの紹介。レビュー平均は4.52、120件の声が集まっています。価格は1,024円。気になった方は、商品ページでサイズや内容の確認を。ジャンルはキッチン用品。';
+scene('sc-phone',async function(c){
+  $('ph-t').textContent='';vis('ph-h',0);vis('ph-p',0);$('ph-toast').className='toast';
+  await c.wait(500);var f=document.querySelector('#sc-phone .flash');f.classList.remove('go');void f.offsetWidth;f.classList.add('go');
+  await c.wait(900);await c.type('ph-t',PH,32);vis('ph-h',1);await c.wait(300);vis('ph-p',1);
+  await c.wait(1500);$('ph-toast').className='toast show';await c.wait(2600);
+});
+
+scene('sc-img',async function(c){
+  $('im-c').textContent='';$('im-cur').classList.add('on');vis('im-s',0);vis('im-o',0);$('im-p').style.opacity=0;$('im-bar').style.width='0%';
+  await c.type('im-c','python3 room_tools.py image 1 "明るいキッチンの棚、やわらかい光のイラスト"',32);$('im-cur').classList.remove('on');
+  vis('im-s',1);
+  for(var i=1;i<=10;i++){if(!c.alive())return;$('im-bar').style.width=(i*10)+'%';await c.wait(260)}
+  vis('im-o',1);$('im-p').style.transition='opacity .8s';$('im-p').style.opacity=1;await c.wait(2800);
+});
+/* ---------- architecture ---------- */
+function mkArch(rid,pid,sid,tid,S){
+  var arch=$(rid); if(!arch)return;
+  var nodes=arch.querySelectorAll('.a-node'),pk=$(pid);
+  var cur=0,timer=null;
+  function show(i){
+    cur=i;var s=S[i];
+    nodes.forEach(function(n,k){n.classList.toggle('on',k===s[0])});
+    $(sid).textContent=(i+1)+' / '+S.length;$(tid).textContent=s[1];
+    var n=nodes[s[0]];pk.style.left=(n.offsetLeft+n.offsetWidth/2-6)+'px';
+  }
+  show(0);
+  function tick(){show((cur+1)%S.length)}
+  if(reduce||!('IntersectionObserver' in window))return;
+  new IntersectionObserver(function(es){es.forEach(function(e){
+    if(e.isIntersecting){if(!timer)timer=setInterval(tick,3200)}else{clearInterval(timer);timer=null;show(0)}})},{threshold:.4}).observe(arch);
+  window.addEventListener('resize',function(){show(cur)});
+}
+mkArch('arch','a-packet','a-step','a-text',[[0,'決めた時間になると、Claude Codeが自動で起動します。'],[1,'Claudeが、キットの6つの手順を読み込みます。'],[2,'公式APIに、売れ行きをもとにしたランキングを聞きます。'],[1,'候補が返り、人気と評価の高い4件をClaudeが選択。そのまま、投稿文の下書きへ。'],[3,'画像生成APIに、イメージ画像の指示文を送り、画像を受け取ります。'],[4,'あなたが、投稿文と画像をROOMアプリで貼り付けて、投稿します。']]);
+mkArch('arch2','a2-packet','a2-step','a2-text',[[0,'毎朝7時になると、予約が自動でClaude Codeを起動します。'],[1,'Claudeが、キットの手順を読み込みます。質問はしません。'],[2,'公式APIから、売れ筋と人気の候補を取得します。'],[1,'4件を選び、事実だけで投稿文を下書きします。'],[3,'画像生成APIで、それぞれに添えるイメージ画像を作ります。'],[4,'文章と画像が、スマホの同期フォルダにそろう。好きな時間に、貼り付けて投稿。']]);
+scene('sc-sched',async function(c){
+  var li=document.querySelectorAll('#sd-tasks li'),turn=$('sd-turn');
+  li.forEach(function(x){x.className=''});turn.style.visibility='hidden';
+  $('sd-u').textContent='';
+  await c.type('sd-u','毎朝7時に run_daily.sh を動かす設定をして',70);await c.wait(500);
+  for(var i=0;i<li.length;i++){if(!c.alive())return;li[i].className='run';await c.wait(1000);li[i].className='ok'}
+  turn.style.visibility='visible';await c.wait(2800);
+},function(){document.querySelectorAll('#sd-tasks li').forEach(function(x){x.className='ok'})});
+
+/* ---------- player ---------- */
+var FETCH="番号  商品名                                  価格    料率  レビュー     ショップ\n1     やわらか素材のキッチンクロス 5枚セット  1063円  2     4.52(120件)  サンプルショップ\n2     折りたたみ式 洗濯ネット 3点セット       1763円  3     4.38(157件)  サンプルショップ\n3     ペン立て付き 卓上収納ケース             2463円  4     4.71(194件)  サンプルショップ\n4     ステンレス保存容器 3個セット            1024円  2     4.52(120件)  サンプルショップ\n5     シリコン製 調理スプーン 2本組           1724円  3     4.38(157件)  サンプルショップ\n6     耐熱ガラス 計量カップ 500ml             2424円  4     4.71(194件)  サンプルショップ\n7     焼き菓子 詰め合わせ 12個入              1047円  2     4.52(120件)  サンプルショップ\n8     しっとりバウム 個包装                   1747円  3     4.38(157件)  サンプルショップ\n9     冷やして食べる 濃厚プリン 6個           2447円  4     4.71(194件)  サンプルショップ\n10    国産米使用 玄米フレーク                 1007円  2     4.52(120件)  サンプルショップ\n11    だし香る 即席みそ汁 30食                1707円  3     4.38(157件)  サンプルショップ\n12    産地直送 みかん 3kg                     2407円  4     4.71(194件)  サンプルショップ";
+var POST="作り置きの保存場所に困っている方へ。ステンレス製の保存容器、3個セットの紹介。レビュー平均は4.52、120件の声が集まっています。価格は1,024円。気になった方は、商品ページでサイズや内容の確認を。ジャンルはキッチン用品。\n#キッチン収納 #作り置き #保存容器\n【PR】";
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+var steps=[
+ {c:0,t:'sys',v:'⏰ 07:00　予約の時刻。run_daily.sh を実行。'},
+ {c:1,t:'say',v:'今日の投稿準備を開始。公式のランキングAPIから、候補を取得中。'},
+ {c:1,t:'cmd',v:'python3 room_tools.py fetch',tool:1},
+ {c:1,t:'out',v:FETCH},
+ {c:1,t:'say',v:'ランキングの順位とレビュー件数が高い4件を、選んで記録しました。（医薬品、サプリ、化粧品、健康器具は除いています）'},
+ {c:1,t:'cmd',v:'python3 room_tools.py shown 1 4 7 10',tool:1},
+ {c:1,t:'out',v:'4件を記録しました（表示済み）'},
+ {c:2,t:'say',v:'投稿文を today/posts.txt に4本作成しました。（取得した事実だけで書いています）'},
+ {c:2,t:'post',v:POST},
+ {c:3,t:'cmd',v:'python3 room_tools.py image 1 "明るいキッチンの棚、やわらかい光のイラスト。文字なし"',tool:1},
+ {c:3,t:'out',v:'today/image_1.png に保存しました'},
+ {c:3,t:'say',v:'4本分の画像を today フォルダに保存しました。同期フォルダにもコピーしました。'},
+ {c:4,t:'say',v:'今日の分がそろいました。あとは、ROOMアプリで文章を貼り付け、画像を添えて、投稿。'}
+];
+var stage=$('stage'),hint=$('hint'),chips=document.querySelectorAll('#chips li'),timer=null,run=0,played=false;
+function setChips(n){chips.forEach(function(li,i){li.className=i<n?'done':i===n?'on':''})}
+function allChips(){chips.forEach(function(li){li.className='done'})}
+function render(s,animate){
+  var d=document.createElement('div');d.className='ln-row'+(animate?' pop':'');
+  if(s.t==='cmd'){d.innerHTML=(s.tool?'<span class="c-dim">⏺ 実行　</span>':'<span class="c-gold">&gt; </span>')+'<span>'+esc(s.v)+'</span>'}
+  else if(s.t==='sys'){d.innerHTML='<span class="c-gold">'+esc(s.v)+'</span>'}
+  else if(s.t==='say'){d.innerHTML='<span class="c-teal">Claude　</span>'+esc(s.v).replace(/\n/g,'<br>')}
+  else if(s.t==='out'){d.innerHTML='<pre class="c-dim" style="color:#9eacb9">'+esc(s.v)+'</pre>'}
+  else if(s.t==='q'){var h='<div class="q"><h5>'+esc(s.h)+'</h5><ul>';s.o.forEach(function(o){h+='<li class="'+(o[2]?'on':'')+'"><b>'+(o[2]?'☑':'☐')+'</b>'+(/^\d+$/.test(o[0])?o[0]+'　':'')+esc(o[1])+'</li>'});d.innerHTML=h+'</ul></div>'}
+  else if(s.t==='post'){d.innerHTML='<div class="q" style="border-color:#cdab6a"><h5>today/posts.txt　1本目</h5><div style="color:#eef0ea;white-space:pre-wrap;font-family:var(--f-body)">'+esc(s.v)+'</div></div>'}
+  stage.appendChild(d);return d;
+}
+function showAll(){clearTimeout(timer);run++;stage.innerHTML='';steps.forEach(function(s){render(s,false)});var c=document.createElement('div');c.innerHTML='<span class="c-gold">&gt; </span><span class="cursor"></span>';stage.appendChild(c);hint.textContent='いまは全体を表示しています';allChips();stage.scrollTop=0}
+function play(){
+  clearTimeout(timer);var my=++run;stage.innerHTML='';hint.textContent='再生中';setChips(0);var i=0;
+  function next(){
+    if(my!==run)return;
+    if(i>=steps.length){hint.textContent='再生が終わりました';allChips();return}
+    var s=steps[i++];setChips(s.c);
+    if(s.t==='cmd'){
+      var d=render({t:'cmd',v:'',tool:s.tool},true),sp=d.lastChild,k=0;
+      (function type(){ if(my!==run)return; sp.textContent=s.v.slice(0,++k); if(k<s.v.length){timer=setTimeout(type,s.tool?35:80)}else{timer=setTimeout(next,600)} })();
+    } else { render(s,true); timer=setTimeout(next,s.t==='out'?1100:s.t==='q'?1700:1300) }
+    stage.scrollTop=stage.scrollHeight;
+  }
+  next();
+}
+function setMode(m){
+  ['m-auto','m-talk','m-slash'].forEach(function(id){$(id).classList.toggle('on',id===m)});
+  steps[0]=m==='m-auto'?{c:0,t:'sys',v:'⏰ 07:00　予約の時刻。run_daily.sh を実行。'}:{c:0,t:'cmd',v:m==='m-talk'?'今日の投稿を作って':'/room'};
+  showAll();
+}
+$('m-auto').addEventListener('click',function(){setMode('m-auto')});
+$('m-talk').addEventListener('click',function(){setMode('m-talk')});
+$('m-slash').addEventListener('click',function(){setMode('m-slash')});
+$('play').addEventListener('click',function(){played=true;if(reduce){showAll();return}play()});
+$('showall').addEventListener('click',function(){played=true;showAll()});
+showAll();
+if(!reduce&&'IntersectionObserver' in window){
+  new IntersectionObserver(function(es,io){es.forEach(function(e){if(e.isIntersecting&&!played){played=true;io.disconnect();play()}})},{threshold:.5}).observe($('player'));
+}
+})();
+
+
+/* ---------- kit zip (built in the browser) ---------- */
+(function(){
+  var FILES=[['code0','room_tools.py'],['code1','CLAUDE.md'],['code2','.claude/commands/room.md'],['code3','.env.example'],['code4','run_daily.sh'],['code5','run_daily.bat']];
+  var T=null;function crcT(){if(T)return T;T=[];for(var n=0;n<256;n++){var c=n;for(var k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;T[n]=c>>>0}return T}
+  function crc(b){var t=crcT(),c=0xFFFFFFFF;for(var i=0;i<b.length;i++)c=t[(c^b[i])&255]^(c>>>8);return (c^0xFFFFFFFF)>>>0}
+  function u16(v){return [v&255,(v>>>8)&255]}function u32(v){return [v&255,(v>>>8)&255,(v>>>16)&255,(v>>>24)&255]}
+  function buildZip(list){
+    var enc=new TextEncoder(),parts=[],cen=[],off=0,now=new Date();
+    var dt=((now.getHours()<<11)|(now.getMinutes()<<5)|(now.getSeconds()>>1))&0xFFFF;
+    var dd=(((now.getFullYear()-1980)<<9)|((now.getMonth()+1)<<5)|now.getDate())&0xFFFF;
+    list.forEach(function(f){
+      var nm=enc.encode(f.name),data=f.data,cr=crc(data);
+      var lh=[].concat(u32(0x04034b50),u16(20),u16(0x0800),u16(0),u16(dt),u16(dd),u32(cr),u32(data.length),u32(data.length),u16(nm.length),u16(0));
+      parts.push(new Uint8Array(lh),nm,data);
+      var ch=[].concat(u32(0x02014b50),u16(0x031E),u16(20),u16(0x0800),u16(0),u16(dt),u16(dd),u32(cr),u32(data.length),u32(data.length),u16(nm.length),u16(0),u16(0),u16(0),u16(0),u32(0),u32(off));
+      cen.push(new Uint8Array(ch),nm);
+      off+=lh.length+nm.length+data.length;
+    });
+    var csz=0;cen.forEach(function(x){csz+=x.length});
+    var end=[].concat(u32(0x06054b50),u16(0),u16(0),u16(list.length),u16(list.length),u32(csz),u32(off),u16(0));
+    return new Blob(parts.concat(cen,[new Uint8Array(end)]),{type:'application/zip'});
+  }
+  function make(){
+    var enc=new TextEncoder(),out=[];
+    FILES.forEach(function(f){
+      var el=document.getElementById(f[0]);if(!el)return;
+      var t=el.textContent.replace(/\r\n/g,'\n');
+      if(/\.bat$/.test(f[1]))t=t.replace(/\n/g,'\r\n');
+      out.push({name:'rakuten-room-kit/'+f[1],data:enc.encode(t)});
+    });
+    return buildZip(out);
+  }
+  document.querySelectorAll('.zipdl').forEach(function(b){
+    b.addEventListener('click',function(){
+      var msg=document.querySelectorAll('.zipmsg');
+      try{
+        var blob=make(),url=URL.createObjectURL(blob),a=document.createElement('a');
+        a.href=url;a.download='rakuten-room-kit.zip';document.body.appendChild(a);a.click();
+        setTimeout(function(){URL.revokeObjectURL(url);a.remove()},1500);
+        msg.forEach(function(m){m.textContent='ダウンロードを開始。保存された rakuten-room-kit.zip を、解凍して使用。'});
+      }catch(e){
+        msg.forEach(function(m){m.textContent='ダウンロードできませんでした。下のタブから、6つのファイルの中身をコピーして保存してください。'});
+      }
+    });
+  });
+})();
+
+/* ---------- 進行ガイド ---------- */
+(function(){
+  function $(i){return document.getElementById(i)}
+  function sleep(ms){return new Promise(function(r){setTimeout(r,ms)})}
+  function esc(t){return String(t).replace(/&/g,'&amp;').replace(/</g,'&lt;')}
+  var reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(!$('gd-chips'))return;
+  var STEPS=[
+  {s:'登録',t:'楽天ウェブサービスに登録する',d:'楽天の公式の窓口で、このアプリ専用の「鍵」を受け取ります。',
+   todo:['楽天ウェブサービスのアプリ登録を開く','アプリ名と、公開されているURLを入力して登録','表示されたアプリIDとアクセスキーを控える'],
+   ext:[['楽天ウェブサービスに登録する','https://webservice.rakuten.co.jp/app/create'],['楽天アフィリエイトに登録する','https://affiliate.rakuten.co.jp/']],
+   sc:[['you','ui','アプリ名　ROOM準備ツール','アプリ名を入力しています'],['you','ui','アプリURL　https://example.com/','公開されているURLを入力しています'],['site','ui','［ アプリを登録する ］','登録を送信しています'],['site','out','アプリID 1234567890123456789　アクセスキー xxxxxxxx-xxxx','鍵が表示されました。ここで控えます']],
+   ck:[['アプリIDを控えた','画面に出た長い数字を、メモに保存'],['アクセスキーを控えた','アプリIDと並んで表示される文字列'],['登録したURLを控えた','あとの設定で、同じ文字を使用']],
+   nx:'次は、キット一式を入手して、ひとつのフォルダにまとめます。'},
+  {s:'キット',t:'キット一式を入手する',d:'6つのファイルが入ったキットを、自分のパソコンに保存します。',
+   todo:['下のボタンで、zipをダウンロード','zipを解凍','できたフォルダの名前を rakuten-room-kit にする'],
+   ext:[],dl:1,
+   sc:[['you','ui','［ キット一式（zip）をダウンロード ］','ダウンロードボタンを押しています'],['you','cmd','zip を解凍','解凍しています'],['you','out','rakuten-room-kit/ フォルダができた','6つのファイルが、フォルダの中にそろいました']],
+   ck:[['zipを保存した','ダウンロードの保存先を確認'],['解凍した','フォルダが1つできる'],['フォルダの中に6つのファイルがある','room_tools.py など']],
+   nx:'次は、そのフォルダでClaude Codeを起動します。'},
+  {s:'起動',t:'Claude Codeを起動する',d:'キットのフォルダで、Claude Codeを立ち上げます。ここが作業の入口です。',
+   todo:['ターミナル（文字で操作する画面）を開く','キットのフォルダへ移動','claude と入力して、Enterを押す'],
+   ext:[['Claude Codeを入手する','https://docs.claude.com/en/docs/claude-code/overview'],['Pythonをダウンロードする','https://www.python.org/downloads/']],
+   sc:[['you','cmd','cd rakuten-room-kit','キットのフォルダに移動しています'],['you','cmd','claude','Claude Codeを呼び出しています'],['claude','out','Claude Code が起動しました。ここに話しかけます','起動完了。入力欄が出れば成功です']],
+   ck:[['ターミナルを開いた','わからないときは、Claudeに「やさしく教えて」'],['キットのフォルダに移動した','フォルダ名が rakuten-room-kit'],['Claude Codeの入力欄が出た','claude と入力した後の画面']],
+   nx:'次は、「今日の投稿を作って」と話しかけて、設定ファイルを作ります。'},
+  {s:'設定',t:'設定ファイル .env に鍵を入れる',d:'手順1で控えた鍵を、設定ファイルに貼り付けます。最初の1回だけの作業です。',
+   todo:['「今日の投稿を作って」と入力','Claudeが作った .env を、テキストエディタで開く','「ここに〜」の3行を、控えた内容に置き換えて保存'],
+   ext:[],
+   sc:[['you','cmd','今日の投稿を作って','最初の一言を送っています'],['claude','out','.env を作成しました。3行を書き換えてください','Claudeが設定ファイルを作り、案内して止まりました'],['you','ui','RAKUTEN_APP_ID / ACCESS_KEY / REFERER を貼り付けて保存','3行を貼り付けて、保存しています']],
+   ck:[['.env が作られた','フォルダの中に表示される'],['3行を、控えた内容に置き換えた','アプリID、アクセスキー、URL'],['保存した','保存前の画面を閉じない']],
+   nx:'次は、画像を作れるようにします。あとから設定しても、投稿文までは作れます。'},
+  {s:'画像',t:'画像を作れるようにする（任意）',d:'画像生成のサービスで、キーを1つ作って、設定ファイルに入れます。',
+   todo:['OpenAIのサイトでAPIキーを作成','.env の OPENAI_API_KEY に貼り付け','保存する（利用は、使った分だけの従量課金）'],
+   ext:[['OpenAIでAPIキーを作る','https://platform.openai.com/api-keys']],
+   sc:[['site','ui','APIキーを作成　sk-…','キーを作成しています'],['you','ui','.env　OPENAI_API_KEY=sk-… を貼り付け','設定ファイルに貼り付けています'],['claude','out','画像の準備ができました','画像のステップが使えるようになりました']],
+   ck:[['APIキーを作った（またはあとで設定する）','キーがなくても、投稿文までは作成'],['.env に貼り付けた','OPENAI_API_KEY の行'],['保存した','']],
+   nx:'次は、はじめての実行。投稿文と画像が、本当に出来上がるか確かめます。'},
+  {s:'実行',t:'はじめて動かす',d:'「今日の投稿を作って」で、商品探しから投稿文、画像まで、一気に進みます。',
+   todo:['Claude Codeで「今日の投稿を作って」と入力','完了まで待つ（途中の質問はありません）','today フォルダの posts.txt と画像を開く'],
+   ext:[],
+   sc:[['you','cmd','今日の投稿を作って','話しかけています'],['claude','cmd','python3 room_tools.py fetch','公式のランキングから、候補を取得しています'],['claude','out','候補を取得。人気と評価の高い4件を選択','売れ筋の4件を選んでいます'],['claude','out','投稿文 4本 → today/posts.txt','事実だけで、投稿文を書いています'],['claude','out','画像 4枚 → today/image_1〜4.png','イメージ画像を作っています']],
+   ck:[['today/posts.txt ができた','投稿文が4本入っている'],['4本の投稿文を読んだ','【PR】の行と、ハッシュタグ'],['画像ができた（または設定前でOK）','today/image_1.png など']],
+   nx:'次は、毎朝、自動で動くように予約します。'},
+  {s:'予約',t:'毎朝、自動で動かす',d:'決めた時刻に、Claude Codeが自動で起動。話しかける必要はなくなります。',
+   todo:['Claude Codeで「毎朝7時に run_daily.sh を動かす設定をして」と入力（Windowsは run_daily.bat）','登録された予約を、画面で確認','パソコンの電源とログインの状態を確認'],
+   ext:[],
+   sc:[['you','cmd','毎朝7時に run_daily.sh を動かす設定をして','予約をお願いしています'],['claude','out','予約を登録しました（毎朝 07:00）','Claudeが予約を登録しています'],['claude','out','明日の朝から、自動で動きます','登録内容を画面で見せています']],
+   ck:[['予約を頼んだ','時刻は、好きに変更可能'],['登録された内容を確認した','毎朝 07:00 など'],['朝にパソコンの電源が入っている','スリープしていない状態']],
+   nx:'最後は、朝にそろった文章と画像を、スマホで貼り付けて投稿します。'},
+  {s:'投稿',t:'スマホで貼り付けて投稿する',d:'朝にそろった投稿文と画像を使って、ROOMアプリで投稿します。毎日、この作業だけ。',
+   todo:['スマホの同期フォルダで、今日の投稿文と画像を開く','文章を長押しでコピー','ROOMアプリで、文章を貼り付け、画像を添えて投稿'],
+   ext:[['楽天ROOMを開く','https://room.rakuten.co.jp/'],['Google Driveを開く','https://drive.google.com/'],['Dropboxを開く','https://www.dropbox.com/']],
+   sc:[['claude','out','07:00　posts.txt と画像が同期フォルダへ','朝のうちに、材料がそろっています'],['you','ui','スマホで文章を長押し → コピー','文章をコピーしています'],['you','ui','ROOMアプリで貼り付け、画像を添えて、投稿','貼り付けて、投稿しています']],
+   ck:[['同期フォルダで、今日の分が見られる','見られないときは、パソコンの today フォルダ'],['文章をコピーできた','長押し → コピー'],['ROOMアプリで投稿した','画像を添えて']],
+   nx:'すべて完了。明日からは、朝にそろった材料を貼り付けて、投稿するだけです。'}
+  ];
+  var KEY='rrk_guide_v1',st={done:[],cur:0,checks:{}};
+  try{var r=JSON.parse(localStorage.getItem(KEY)||'null');if(r&&r.done)st=r}catch(e){}
+  function save(){try{localStorage.setItem(KEY,JSON.stringify(st))}catch(e){}}
+  if(!st.checks)st.checks={};
+  var chips=$('gd-chips'),token=0,inView=true,busy=false;
+  STEPS.forEach(function(p,i){
+    var b=document.createElement('button');b.type='button';b.className='gd-chip';b.setAttribute('role','tab');
+    b.innerHTML='<b><i>'+(i+1)+'</i>STEP '+(i+1)+'</b><span>'+p.s+'</span>';
+    b.addEventListener('click',function(){if(busy)return;go(i)});chips.appendChild(b);
+  });
+  function paintTrack(){
+    var n=STEPS.length,els=chips.children;
+    for(var i=0;i<n;i++){var done=st.done.indexOf(i)>=0;els[i].className='gd-chip'+(done?' done':'')+(i===st.cur?' cur':'');
+      els[i].setAttribute('aria-selected',i===st.cur?'true':'false');
+      els[i].querySelector('i').textContent=done?'✓':(i+1)}
+    var pct=Math.round(st.done.length/n*100);$('gd-fill').style.width=pct+'%';$('gd-pct').textContent=pct+'%';
+    var c=els[st.cur];if(c&&c.scrollIntoView&&chips.scrollWidth>chips.clientWidth){var l=c.offsetLeft-chips.offsetLeft-20;chips.scrollTo?chips.scrollTo({left:l,behavior:reduce?'auto':'smooth'}):0}
+  }
+  function paintStep(){
+    var p=STEPS[st.cur];
+    $('gd-title').textContent='STEP '+(st.cur+1)+'　'+p.t;$('gd-doing').textContent=p.d;
+    $('gd-todo').innerHTML=p.todo.map(function(x){return '<li>'+esc(x)+'</li>'}).join('');
+    var ex=p.ext.map(function(e){return '<a class="ext" href="'+e[1]+'" target="_blank" rel="noopener noreferrer">'+e[0]+'</a>'}).join('');
+    if(p.dl)ex+='<button type="button" class="ext dl zipdl2">キット一式（zip）をダウンロードする</button>';
+    $('gd-ext').innerHTML=ex;$('gd-ext').style.display=ex?'':'none';
+    var z=document.querySelector('#gd-ext .zipdl2');if(z)z.addEventListener('click',function(){var b=document.querySelector('.zipdl');if(b)b.click()});
+    var ck=st.checks[st.cur]||[];
+    $('gd-checks').innerHTML=p.ck.map(function(c,i){return '<li><label><input type="checkbox" '+(ck[i]?'checked':'')+'><span class="bx"></span><span class="tx"><b>'+esc(c[0])+'</b>'+(c[1]?'<small>'+esc(c[1])+'</small>':'')+'</span></label><span class="st"></span></li>'}).join('');
+    $('gd-checks').querySelectorAll('input').forEach(function(inp,i){inp.addEventListener('change',function(){
+      var a=st.checks[st.cur]||(st.checks[st.cur]=[]);a[i]=inp.checked;save();
+      var li=inp.closest('li');li.className='';$('gd-res').textContent='';$('gd-res').className='gd-res'})});
+    var done=st.done.indexOf(st.cur)>=0;
+    $('gd-res').textContent='';$('gd-res').className='gd-res';
+    $('gd-next').classList.remove('show');
+    if(done){showNext(false)}
+    $('gd-prog').innerHTML=p.sc.map(function(){return '<u></u>'}).join('');
+    paintTrack();runScene();
+  }
+  function go(i){st.cur=i;save();paintStep()}
+  function typeInto(el,text,sp,my){return new Promise(function(res){var k=0;(function t(){if(my!==token)return res();k++;el.textContent=text.slice(0,k);if(k<text.length)setTimeout(t,sp);else res()})()})}
+  function showNext(anim){
+    var p=STEPS[st.cur],last=st.cur===STEPS.length-1,tx=$('gd-nexttx');
+    $('gd-go').style.display=last?'none':'';
+    $('gd-next').classList.add('show');
+    if(anim&&!reduce){tx.textContent='';typeInto(tx,p.nx,32,token)}else tx.textContent=p.nx;
+  }
+  async function verify(){
+    if(busy)return;busy=true;$('gd-verify').disabled=true;
+    var lis=[].slice.call($('gd-checks').children),ng=0;
+    lis.forEach(function(li){li.className=''});$('gd-res').textContent='';$('gd-res').className='gd-res';$('gd-next').classList.remove('show');
+    for(var i=0;i<lis.length;i++){
+      lis[i].className='run';await sleep(reduce?60:520);
+      var on=lis[i].querySelector('input').checked;
+      lis[i].className=on?'ok':'ng';if(!on)ng++;await sleep(reduce?20:160);
+    }
+    if(ng===0){
+      if(st.done.indexOf(st.cur)<0)st.done.push(st.cur);save();paintTrack();
+      var last=st.cur===STEPS.length-1;
+      $('gd-res').textContent=last?'すべてOK。全8手順が完了です':'ここまでOK。STEP '+(st.cur+1)+' 完了です';$('gd-res').className='gd-res ok';
+      await sleep(reduce?0:500);showNext(true);
+    }else{
+      $('gd-res').textContent='あと'+ng+'つ。「まだ」の項目を確かめて、チェックを入れてから、もう一度押してください';$('gd-res').className='gd-res ng';
+      var f=lis.filter(function(l){return l.className==='ng'})[0];if(f&&f.scrollIntoView)f.scrollIntoView({block:'nearest',behavior:reduce?'auto':'smooth'});
+    }
+    $('gd-verify').disabled=false;busy=false;
+  }
+  $('gd-verify').addEventListener('click',verify);
+  $('gd-go').addEventListener('click',function(){if(st.cur<STEPS.length-1){go(st.cur+1);var t=$('guide');if(t&&t.scrollIntoView)t.scrollIntoView({behavior:reduce?'auto':'smooth',block:'start'})}});
+  $('gd-reset').addEventListener('click',function(){st={done:[],cur:0,checks:{}};save();paintStep()});
+  /* scene */
+  function setActor(a){document.querySelectorAll('.gd-actors span').forEach(function(x){x.classList.toggle('on',x.getAttribute('data-a')===a)})}
+  async function runScene(){
+    var my=++token,p=STEPS[st.cur],body=$('gd-body'),cap=$('gd-cap'),prog=$('gd-prog').children;
+    if(reduce){body.innerHTML=p.sc.map(function(l){return '<span class="gd-l '+l[1]+' cur">'+esc(l[2])+'</span>'}).join('');cap.textContent=p.sc[p.sc.length-1][3];setActor(p.sc[p.sc.length-1][0]);return}
+    while(my===token){
+      body.innerHTML='';for(var q=0;q<prog.length;q++)prog[q].className='';
+      for(var i=0;i<p.sc.length;i++){
+        if(my!==token)return;
+        while((!inView||document.hidden)&&my===token)await sleep(400);
+        var l=p.sc[i],row=document.createElement('span');row.className='gd-l '+l[1]+' cur';
+        [].forEach.call(body.children,function(x){x.classList.remove('cur')});
+        body.appendChild(row);setActor(l[0]);cap.textContent=l[3];prog[i].className='on';
+        await typeInto(row,l[2],l[1]==='out'?14:34,my);if(my!==token)return;
+        await sleep(1100);
+      }
+      await sleep(2000);
+    }
+  }
+  if('IntersectionObserver' in window)new IntersectionObserver(function(es){inView=es[0].isIntersecting},{threshold:.1}).observe($('guide'));
+  paintStep();
+})();
+</script>
